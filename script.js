@@ -1,37 +1,71 @@
-// EverMineSMP Store
-
-console.log("EverMineSMP Store Loaded");
-
-// Shopping Cart
 let cart = [];
 
-// Tambah ke keranjang
-function addToCart(product, price) {
+function addToCart(name, price) {
     cart.push({
-        product: product,
+        name: name,
         price: price
     });
 
-    alert(product + " berhasil ditambahkan ke keranjang!");
+    updateCart();
 }
 
-// Beli melalui WhatsApp
-function buyNow(product, price) {
-    const nomor = "628975293251";
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
 
-    const pesan =
-`Halo Admin EverMineSMP!
+function updateCart() {
 
-Saya ingin membeli:
+    const cartItems = document.getElementById("cart-items");
+    const total = document.getElementById("cart-total");
 
-Produk : ${product}
-Harga : Rp${price}
+    cartItems.innerHTML = "";
 
-Username Minecraft :
-`;
+    let totalPrice = 0;
+
+    cart.forEach((item, index) => {
+
+        totalPrice += item.price;
+
+        cartItems.innerHTML += `
+        <div class="cart-item">
+            <span>${item.name}</span>
+
+            <span>
+            Rp${item.price.toLocaleString("id-ID")}
+            </span>
+
+            <button onclick="removeItem(${index})">
+            ❌
+            </button>
+        </div>
+        `;
+    });
+
+    total.innerHTML =
+    "Total : Rp" +
+    totalPrice.toLocaleString("id-ID");
+}
+
+function checkout() {
+
+    if(cart.length === 0){
+        alert("Keranjang masih kosong.");
+        return;
+    }
+
+    let pesan = "Halo Admin EverMineSMP!%0A%0ASaya ingin membeli:%0A";
+
+    cart.forEach(item=>{
+        pesan += "- " + item.name + " (Rp" + item.price + ")%0A";
+    });
+
+    let total = cart.reduce((a,b)=>a+b.price,0);
+
+    pesan += "%0ATotal : Rp" + total;
 
     window.open(
-        `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`,
-        "_blank"
+    "https://wa.me/628975293251?text="+pesan,
+    "_blank"
     );
 }
