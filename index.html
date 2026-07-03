@@ -1,200 +1,244 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVERMINESMP.MY.ID | Official Store</title>
 
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>EVERMINESMP.MY.ID</title>
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:#111827;
+position:sticky;
+top:0;
+}
+
+nav h2{
+color:#22c55e;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+nav a:hover{
+color:#22c55e;
+}
+
+.hero{
+
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+
+height:90vh;
+
+padding:20px;
+
+background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.8));
+
+}
+
+.hero h1{
+
+font-size:60px;
+
+margin-bottom:20px;
+
+}
+
+.hero p{
+
+max-width:700px;
+
+line-height:30px;
+
+color:#d1d5db;
+
+}
+
+.btn{
+
+display:inline-block;
+
+margin-top:30px;
+
+padding:15px 35px;
+
+background:#22c55e;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+}
+
+.btn:hover{
+
+background:#16a34a;
+
+}
+
+.info{
+
+padding:70px 8%;
+
+background:#111827;
+
+}
+
+.boxes{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+margin-top:30px;
+
+}
+
+.box{
+
+background:#1f2937;
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+}
+
+.box h3{
+
+color:#22c55e;
+
+margin-bottom:10px;
+
+}
+
+footer{
+
+background:#020617;
+
+padding:30px;
+
+text-align:center;
+
+margin-top:50px;
+
+}
+
+footer p{
+
+margin:8px 0;
+
+color:#94a3b8;
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-<nav class="navbar">
+<nav>
 
-<div class="logo">
-🎮 EVERMINESMP
+<h2>🎮 EVERMINE SMP</h2>
+
+<div>
+
+<a href="index.html">Home</a>
+
+<a href="store.html">Store</a>
+
+<a href="login.html">Login</a>
+
+<a href="checkout.html">Checkout</a>
+
 </div>
-
-<ul>
-
-<li><a href="#">Home</a></li>
-
-<li><a href="#store">Store</a></li>
-
-<li><a href="#ranks">Ranks</a></li>
-
-<li><a href="#payment">Payment</a></li>
-
-<li><a href="#contact">Contact</a></li>
-
-</ul>
 
 </nav>
 
 <section class="hero">
 
-<div class="hero-content">
-
 <h1>
+
 JOIN EVERMINESMP
+
 </h1>
 
 <p>
 
-Support EverMineSMP by purchasing ranks,
-EverMine Key and exclusive perks.
+Server Survival Indonesia dengan Rank Premium, EverMine Key, Claim, RTP, Shop, Gacha, Economy, dan banyak fitur menarik lainnya.
 
 </p>
 
-<div class="buttons">
+<a href="store.html" class="btn">
 
-<a href="#store" class="btn green">
-Browse Store
+🛒 Buka Store
+
 </a>
-
-<a href="minecraft://?addExternalServer=EverMineSMP|play.everminesmp.my.id:25372"
-class="btn gold">
-Join Server
-</a>
-
-</div>
-
-<div class="server-box">
-
-<h3>SERVER INFORMATION</h3>
-
-<p>
-
-IP :
-<b>play.everminesmp.my.id</b>
-
-</p>
-
-<p>
-
-PORT :
-<b>25372</b>
-
-</p>
-
-</div>
-
-</div>
 
 </section>
 
-<section id="store">
+<section class="info">
 
-<h2>
-FEATURED PRODUCTS
-</h2>
+<h2 align="center">
 
-<div class="cards">
-
-<div class="card">
-
-<h3>💎 VIP</h3>
-
-<span>Rp25.000</span>
-
-<button>Beli</button>
-
-</div>
-
-<div class="card">
-
-<h3>✨ VIP+</h3>
-
-<span>Rp55.000</span>
-
-<button>Beli</button>
-
-</div>
-
-<div class="card">
-
-<h3>🏆 MVP</h3>
-
-<span>Rp70.000</span>
-
-<button>Beli</button>
-
-</div>
-
-<div class="card">
-
-<h3>👑 LEGENDARY</h3>
-
-<span>Rp190.000</span>
-
-<button>Beli</button>
-
-</div>
-
-<div class="card">
-
-<h3>🔥 DIVINE</h3>
-
-<span>Rp250.000</span>
-
-<button>Beli</button>
-
-</div>
-
-<div class="card">
-
-<h3>🔑 EVERMINE KEY</h3>
-
-<span>Rp4.500</span>
-
-<button>Beli</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="payment">
-
-<h2>
-
-PEMBAYARAN
+SERVER INFO
 
 </h2>
 
-<img src="assets/qris.png">
+<div class="boxes">
+
+<div class="box">
+
+<h3>🌐 Website</h3>
 
 <p>
 
-Scan QRIS kemudian kirim bukti transfer ke WhatsApp.
+everminesmp.my.id
 
 </p>
 
-<a class="btn green"
+</div>
 
-href="https://wa.me/628975293251">
+<div class="box">
 
-WhatsApp Admin
-
-</a>
-
-</section>
-
-<footer>
-
-<h3>
-
-EVERMINESMP.MY.ID
-
-</h3>
+<h3>🎮 Server IP</h3>
 
 <p>
 
@@ -202,29 +246,118 @@ play.everminesmp.my.id
 
 </p>
 
+</div>
+
+<div class="box">
+
+<h3>🔌 Port</h3>
+
 <p>
 
-Port : 25372
+25372
 
 </p>
 
-<div class="social">
-
-<a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3?mode=gi_t">
-
-WhatsApp Group
-
-</a>
-
 </div>
+
+<div class="box">
+
+<h3>📱 WhatsApp</h3>
 
 <p>
 
-© 2026 EverMineSMP
+08975293251
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="info">
+
+<h2 align="center">
+
+FITUR SERVER
+
+</h2>
+
+<div class="boxes">
+
+<div class="box">
+⭐ Rank Trial & Permanent
+</div>
+
+<div class="box">
+🔑 EverMine Key
+</div>
+
+<div class="box">
+🏠 Claim Land
+</div>
+
+<div class="box">
+💰 Economy
+</div>
+
+<div class="box">
+🛒 Shop
+</div>
+
+<div class="box">
+🎁 Gacha
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2 style="color:#22c55e;">
+
+EVERMINESMP.MY.ID
+
+</h2>
+
+<p>
+
+Website :
+everminesmp.my.id
+
+</p>
+
+<p>
+
+Server :
+play.everminesmp.my.id
+
+</p>
+
+<p>
+
+Port :
+25372
+
+</p>
+
+<p>
+
+WhatsApp :
+08975293251
+
+</p>
+
+<p>
+
+© 2026 EverMineSMP. All Rights Reserved.
 
 </p>
 
 </footer>
 
 </body>
+
 </html>
