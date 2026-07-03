@@ -1,410 +1,783 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evermine Store | Minecraft Server</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Teko:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter & Teko -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* Slate 900 */
-            color: #f8fafc;
+            background-color: #0b0f19; /* Darker Slate-950 for premium contrast */
+            color: #f1f5f9;
         }
         h1, h2, h3, .font-display {
             font-family: 'Teko', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
         .rank-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .rank-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; border: 1px solid #334155; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
         
-        /* Rank Colors Glow */
-        .glow-member { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); border-top: 4px solid #22c55e; }
-        .glow-vip { box-shadow: 0 0 15px rgba(6, 182, 212, 0.2); border-top: 4px solid #06b6d4; }
-        .glow-vipplus { box-shadow: 0 0 15px rgba(234, 179, 8, 0.2); border-top: 4px solid #eab308; }
-        .glow-mvp { box-shadow: 0 0 15px rgba(249, 115, 22, 0.2); border-top: 4px solid #f97316; }
-        .glow-legendary { box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); border-top: 4px solid #a855f7; }
-        .glow-divine { box-shadow: 0 0 15px rgba(239, 68, 68, 0.2); border-top: 4px solid #ef4444; }
+        /* Rank Colors Glow and Borders */
+        .glow-member { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.1); border-top: 5px solid #10b981; }
+        .glow-member:hover { box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4); }
+        
+        .glow-vip { box-shadow: 0 4px 20px rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.1); border-top: 5px solid #06b6d4; }
+        .glow-vip:hover { box-shadow: 0 10px 25px rgba(6, 182, 212, 0.25); border-color: rgba(6, 182, 212, 0.4); }
+        
+        .glow-vipplus { box-shadow: 0 4px 20px rgba(234, 179, 8, 0.05); border: 1px solid rgba(234, 179, 8, 0.1); border-top: 5px solid #eab308; }
+        .glow-vipplus:hover { box-shadow: 0 10px 25px rgba(234, 179, 8, 0.25); border-color: rgba(234, 179, 8, 0.4); }
+        
+        .glow-mvp { box-shadow: 0 4px 20px rgba(249, 115, 22, 0.05); border: 1px solid rgba(249, 115, 22, 0.1); border-top: 5px solid #f97316; }
+        .glow-mvp:hover { box-shadow: 0 10px 25px rgba(249, 115, 22, 0.25); border-color: rgba(249, 115, 22, 0.4); }
+        
+        .glow-legendary { box-shadow: 0 4px 20px rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.1); border-top: 5px solid #a855f7; }
+        .glow-legendary:hover { box-shadow: 0 10px 25px rgba(168, 85, 247, 0.25); border-color: rgba(168, 85, 247, 0.4); }
+        
+        .glow-divine { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.1); border-top: 5px solid #ef4444; }
+        .glow-divine:hover { box-shadow: 0 10px 25px rgba(239, 68, 68, 0.25); border-color: rgba(239, 68, 68, 0.4); }
+        
+        /* Pulse Animation */
+        .ping-slow {
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
 
-    <!-- Header / Navbar -->
-    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
+    <!-- Navigation Bar -->
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-display font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-earth-americas text-emerald-500"></i> EVERMINE
+            <!-- Logo Brand -->
+            <a href="#" class="text-3xl font-display font-bold text-white flex items-center gap-2.5">
+                <i class="fa-solid fa-cube text-emerald-500 text-2xl drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]"></i>
+                <span>EVERMINE<span class="text-emerald-500">SMP</span></span>
             </a>
-            <nav class="hidden md:flex space-x-8 font-semibold">
-                <a href="#" class="text-slate-300 hover:text-white transition">Beranda</a>
-                <a href="#ranks" class="text-slate-300 hover:text-white transition">Ranks</a>
-                <a href="#items" class="text-slate-300 hover:text-white transition">Items</a>
-                <a href="#contact" class="text-slate-300 hover:text-white transition">Kontak</a>
+            
+            <!-- Desktop Links -->
+            <nav class="hidden md:flex space-x-8 font-semibold text-sm tracking-wide">
+                <a href="#" class="text-slate-300 hover:text-emerald-400 transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-emerald-500">Beranda</a>
+                <a href="#ranks" class="text-slate-300 hover:text-emerald-400 transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-emerald-500">Daftar Ranks</a>
+                <a href="#items" class="text-slate-300 hover:text-emerald-400 transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-emerald-500">Crate Keys</a>
+                <a href="#contact" class="text-slate-300 hover:text-emerald-400 transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-emerald-500">Metode Pembayaran</a>
             </nav>
-            <a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" target="_blank" class="hidden md:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg font-bold transition">
-                <i class="fa-brands fa-whatsapp"></i> Join Grup WA
+            
+            <!-- CTA Button Header -->
+            <a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" target="_blank" class="hidden md:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl font-bold transition-all duration-300 shadow-lg shadow-emerald-900/30 hover:shadow-emerald-500/30">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Gabung Grup WA
             </a>
-            <button class="md:hidden text-slate-300 hover:text-white">
-                <i class="fa-solid fa-bars text-2xl"></i>
+            
+            <!-- Mobile Menu Toggle Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-1.5 bg-slate-900 border border-slate-800 rounded-lg">
+                <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
             </button>
+        </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-950 border-b border-slate-800 px-4 py-5 space-y-4">
+            <a href="#" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-emerald-400 font-medium py-1">Beranda</a>
+            <a href="#ranks" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-emerald-400 font-medium py-1">Daftar Ranks</a>
+            <a href="#items" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-emerald-400 font-medium py-1">Crate Keys</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-emerald-400 font-medium py-1">Metode Pembayaran</a>
+            <a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" target="_blank" class="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold transition-colors w-full">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Gabung Grup WA
+            </a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative bg-slate-800 py-20 overflow-hidden">
-        <!-- Background Pattern/Image placeholder -->
-        <div class="absolute inset-0 opacity-20 bg-[url('https://placehold.co/1920x1080/1e293b/0f172a?text=Minecraft+Background')] bg-cover bg-center"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+    <!-- Hero / Server Information Section -->
+    <section class="relative bg-slate-900/40 py-20 lg:py-28 overflow-hidden border-b border-slate-900">
+        <!-- Abstract glowing design background -->
+        <div class="absolute inset-0 opacity-10 bg-[url('https://placehold.co/1920x1080/020617/10b981?text=Minecraft+Blocks')] bg-cover bg-center"></div>
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f19] to-transparent"></div>
         
         <div class="container mx-auto px-4 relative z-10 text-center">
-            <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-emerald-400 text-sm font-bold mb-4">
-                OFFICIAL SERVER STORE
-            </span>
-            <h1 class="text-5xl md:text-7xl font-display font-bold text-white mb-4 drop-shadow-lg">
-                TINGKATKAN PENGALAMAN <br><span class="text-emerald-500">BERMAINMU!</span>
+            <!-- Server Status Active Badge -->
+            <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-slate-950 border border-slate-800 mb-6 shadow-md">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">EVERMINE SERVER ACTIVE</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-8xl font-display font-black text-white mb-6 tracking-wide leading-none">
+                SUPPORT <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500">EVERMINESMP</span>
             </h1>
-            <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-                Dapatkan rank dan item eksklusif untuk mendominasi server. Pembayaran mudah, cepat, dan aman via QRIS.
+            <p class="text-base md:text-lg text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Dapatkan Rank Eksklusif, EverMine Key, serta beragam keistimewaan menarik untuk mempercepat petualangan bertahan hidupmu di server kami!
             </p>
-            <div class="flex justify-center gap-4">
-                <a href="#ranks" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-emerald-500/50 transition transform hover:-translate-y-1">
-                    Lihat Ranks
+            
+            <!-- Quick Actions Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto mb-12">
+                <a href="#ranks" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-emerald-600/25 hover:shadow-emerald-500/40 transition transform hover:-translate-y-0.5">
+                    Browse Ranks
                 </a>
+                <a href="#items" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold py-3.5 px-8 rounded-xl border border-slate-700 transition transform hover:-translate-y-0.5">
+                    Beli Crate Keys
+                </a>
+            </div>
+
+            <!-- Interactive Server Address Cards -->
+            <div class="max-w-2xl mx-auto bg-slate-950/60 backdrop-blur border border-slate-800 p-5 md:p-6 rounded-2xl shadow-xl">
+                <h3 class="text-slate-400 font-semibold text-xs uppercase tracking-widest mb-4">Informasi Akses Server</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- IP Address Card -->
+                    <div class="bg-slate-900/50 border border-slate-800 p-3.5 rounded-xl flex items-center justify-between group hover:border-emerald-500/30 transition-all duration-300">
+                        <div class="text-left">
+                            <p class="text-xs text-slate-500 uppercase font-bold">IP Server</p>
+                            <p class="text-sm md:text-base font-mono font-semibold text-white tracking-wider" id="server-ip">play.everminesmp.my.id</p>
+                        </div>
+                        <button onclick="copyToClipboard('play.everminesmp.my.id', 'IP Server berhasil disalin!')" class="p-2.5 bg-slate-850 hover:bg-emerald-600/20 text-slate-400 hover:text-emerald-400 rounded-lg transition-all duration-200" title="Salin IP">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Port Card -->
+                    <div class="bg-slate-900/50 border border-slate-800 p-3.5 rounded-xl flex items-center justify-between group hover:border-emerald-500/30 transition-all duration-300">
+                        <div class="text-left">
+                            <p class="text-xs text-slate-500 uppercase font-bold">Port Server (Bedrock/PE)</p>
+                            <p class="text-sm md:text-base font-mono font-semibold text-white tracking-wider" id="server-port">25372</p>
+                        </div>
+                        <button onclick="copyToClipboard('25372', 'Port Server berhasil disalin!')" class="p-2.5 bg-slate-850 hover:bg-emerald-600/20 text-slate-400 hover:text-emerald-400 rounded-lg transition-all duration-200" title="Salin Port">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Ranks Section -->
-    <main id="ranks" class="flex-grow container mx-auto px-4 py-16">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-display font-bold text-white mb-2">Pilih Rank Kamu</h2>
-            <p class="text-slate-400 mb-6">Pilih durasi rank yang ingin kamu beli.</p>
+    <!-- Ranks Selection Main Store Section -->
+    <main id="ranks" class="flex-grow container mx-auto px-4 py-16 md:py-24 relative">
+        <div class="text-center mb-16 relative z-10">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-950/40 border border-emerald-800/30 px-3.5 py-1.5 rounded-full mb-3 inline-block">PERKS & PRIVILEGES</span>
+            <h2 class="text-4xl md:text-6xl font-display font-black text-white mb-4">PILIH RANK ANDALAN KAMU</h2>
+            <p class="text-slate-400 mb-8 max-w-md mx-auto">Kami menyediakan opsi durasi uji coba 1 Bulan atau Permanen selamanya.</p>
             
-            <!-- Toggle 1 Bulan / Permanen -->
-            <div class="inline-flex bg-slate-800 rounded-lg p-1 border border-slate-700">
-                <button id="btn-trial" onclick="setDuration('trial')" class="px-6 py-2 rounded-md text-sm font-bold bg-emerald-600 text-white shadow transition-all duration-300">
+            <!-- Durasi Toggle Switch -->
+            <div class="inline-flex bg-slate-950 rounded-2xl p-1.5 border border-slate-800 shadow-inner">
+                <button id="toggle-trial" onclick="changeDuration('trial')" class="px-6 py-2.5 rounded-xl text-sm font-bold bg-emerald-600 text-white shadow transition-all duration-300">
                     1 Bulan (Trial)
                 </button>
-                <button id="btn-perm" onclick="setDuration('perm')" class="px-6 py-2 rounded-md text-sm font-bold text-slate-400 hover:text-white transition-all duration-300">
-                    Permanen
+                <button id="toggle-perm" onclick="changeDuration('perm')" class="px-6 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300">
+                    Permanen (Selamanya)
                 </button>
             </div>
         </div>
 
-        <!-- Ranks Grid -->
+        <!-- Ranks Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <!-- MEMBER -->
-            <div class="rank-card glow-member bg-slate-800 rounded-xl p-6 flex flex-col h-full border border-slate-700">
-                <div class="text-center mb-6">
-                    <h3 class="text-3xl font-display text-emerald-400 font-bold mb-2">🟢 MEMBER</h3>
-                    <div class="text-2xl font-bold text-white price-display" data-trial="GRATIS" data-perm="GRATIS">GRATIS</div>
-                    <p class="text-sm text-slate-400 mt-1 duration-label">Selamanya</p>
+            <!-- MEMBER RANK (FREE) -->
+            <div class="rank-card glow-member bg-slate-900/60 backdrop-blur rounded-2xl p-6 flex flex-col h-full relative overflow-hidden">
+                <div class="text-center mb-6 border-b border-slate-800/60 pb-5">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-400 mb-2 inline-block">Default Rank</span>
+                    <h3 class="text-3.5xl font-display text-emerald-400 font-bold tracking-wider">🟢 MEMBER</h3>
+                    <div class="text-3xl font-extrabold text-white mt-2">GRATIS</div>
+                    <p class="text-xs text-slate-500 mt-1 uppercase duration-sub">Selamanya</p>
                 </div>
                 <div class="flex-grow">
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-bold mb-3">Fitur Akses:</p>
                     <ul class="space-y-3 text-sm text-slate-300 mb-6">
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> /sethome 3</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> /spawn, /home</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> /msg, /tpa, /tpaaccept</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> /bal, /pay, /sell</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> /help, /shop</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Dapat mengatur /sethome hingga 3</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Akses Command utama /spawn & /home</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Komunikasi via /msg, /tpa, /tpaaccept</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Fitur Ekonomi dasar /bal, /pay, /sell</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Menu bantuan dasar /help & /shop</span></li>
                     </ul>
-                    <div class="bg-slate-900 rounded p-3 text-sm border border-slate-700 space-y-2">
-                        <div class="flex justify-between"><span><i class="fa-solid fa-cube text-slate-400"></i> Block Limit:</span> <span class="font-bold">5.000</span></div>
-                        <div class="flex justify-between"><span><i class="fa-solid fa-house text-slate-400"></i> Claim:</span> <span class="font-bold">3</span></div>
-                    </div>
                 </div>
-                <button onclick="buyItem('MEMBER')" class="w-full mt-6 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-lg transition disabled:opacity-50" disabled>
-                    Bawaan Server
-                </button>
+                <div class="mt-auto space-y-4">
+                    <div class="bg-slate-950/80 rounded-xl p-3 text-xs border border-slate-850 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-cube text-slate-600 mr-1.5"></i> Block Limit:</span> 
+                            <span class="font-bold text-slate-300">5.000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-house-circle-check text-slate-600 mr-1.5"></i> Claim Limit:</span> 
+                            <span class="font-bold text-slate-300">3</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-slate-800 text-slate-500 font-bold py-3.5 rounded-xl cursor-not-allowed" disabled>
+                        Aktif Secara Otomatis
+                    </button>
+                </div>
             </div>
 
-            <!-- VIP -->
-            <div class="rank-card glow-vip bg-slate-800 rounded-xl p-6 flex flex-col h-full border border-slate-700">
-                <div class="text-center mb-6">
-                    <h3 class="text-3xl font-display text-cyan-400 font-bold mb-2">💎 VIP</h3>
-                    <div class="text-2xl font-bold text-white price-display" data-trial="Rp 25.000" data-perm="Rp 40.000">Rp 25.000</div>
-                    <p class="text-sm text-slate-400 mt-1 duration-label">1 Bulan</p>
+            <!-- VIP RANK -->
+            <div class="rank-card glow-vip bg-slate-900/60 backdrop-blur rounded-2xl p-6 flex flex-col h-full relative overflow-hidden">
+                <div class="text-center mb-6 border-b border-slate-800/60 pb-5">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-cyan-950/50 text-cyan-400 mb-2 inline-block">Best Starter</span>
+                    <h3 class="text-3.5xl font-display text-cyan-400 font-bold tracking-wider">💎 VIP</h3>
+                    <div class="text-3xl font-extrabold text-white mt-2 item-price" data-trial="Rp 25.000" data-perm="Rp 40.000">Rp 25.000</div>
+                    <p class="text-xs text-slate-400 mt-1 uppercase duration-sub">1 Bulan</p>
                 </div>
                 <div class="flex-grow">
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-bold mb-3">Termasuk Semua Fitur Member +</p>
                     <ul class="space-y-3 text-sm text-slate-300 mb-6">
-                        <li class="flex items-start gap-2 text-cyan-300"><i class="fa-solid fa-plus mt-1"></i> Semua fitur MEMBER</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> /sethome 5</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> /feed</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> /workbench</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-cyan-500 mt-0.5"></i> <span>Dapat mengatur /sethome hingga 5</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-cyan-500 mt-0.5"></i> <span>Kemudahan kenyang instant via /feed</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-cyan-500 mt-0.5"></i> <span>Akses Crafting Table portabel /workbench</span></li>
                     </ul>
-                    <div class="bg-slate-900 rounded p-3 text-sm border border-slate-700 space-y-2">
-                        <div class="flex justify-between"><span><i class="fa-solid fa-cube text-slate-400"></i> Block Limit:</span> <span class="font-bold text-cyan-400">10.000</span></div>
-                        <div class="flex justify-between"><span><i class="fa-solid fa-house text-slate-400"></i> Claim:</span> <span class="font-bold text-cyan-400">5</span></div>
-                    </div>
                 </div>
-                <button onclick="buyItem('VIP')" class="w-full mt-6 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-4 rounded-lg transition shadow-lg shadow-cyan-900">
-                    Beli Sekarang
-                </button>
+                <div class="mt-auto space-y-4">
+                    <div class="bg-slate-950/80 rounded-xl p-3 text-xs border border-slate-850 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-cube text-cyan-600/75 mr-1.5"></i> Block Limit:</span> 
+                            <span class="font-bold text-cyan-400">10.000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-house-circle-check text-cyan-600/75 mr-1.5"></i> Claim Limit:</span> 
+                            <span class="font-bold text-cyan-400">5</span>
+                        </div>
+                    </div>
+                    <button onclick="openCheckoutModal('VIP')" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 rounded-xl transition duration-200 shadow-lg shadow-cyan-900/40">
+                        Beli Sekarang
+                    </button>
+                </div>
             </div>
 
-            <!-- VIP+ -->
-            <div class="rank-card glow-vipplus bg-slate-800 rounded-xl p-6 flex flex-col h-full border border-slate-700">
-                <div class="text-center mb-6">
-                    <h3 class="text-3xl font-display text-yellow-400 font-bold mb-2">✨ VIP+</h3>
-                    <div class="text-2xl font-bold text-white price-display" data-trial="Rp 40.000" data-perm="Rp 60.000">Rp 40.000</div>
-                    <p class="text-sm text-slate-400 mt-1 duration-label">1 Bulan</p>
+            <!-- VIP+ RANK -->
+            <div class="rank-card glow-vipplus bg-slate-900/60 backdrop-blur rounded-2xl p-6 flex flex-col h-full relative overflow-hidden">
+                <div class="text-center mb-6 border-b border-slate-800/60 pb-5">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-yellow-950/50 text-yellow-400 mb-2 inline-block">Popular Choice</span>
+                    <h3 class="text-3.5xl font-display text-yellow-400 font-bold tracking-wider">✨ VIP+</h3>
+                    <div class="text-3xl font-extrabold text-white mt-2 item-price" data-trial="Rp 40.000" data-perm="Rp 60.000">Rp 40.000</div>
+                    <p class="text-xs text-slate-400 mt-1 uppercase duration-sub">1 Bulan</p>
                 </div>
                 <div class="flex-grow">
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-bold mb-3">Termasuk Semua Fitur VIP +</p>
                     <ul class="space-y-3 text-sm text-slate-300 mb-6">
-                        <li class="flex items-start gap-2 text-yellow-300"><i class="fa-solid fa-plus mt-1"></i> Semua fitur VIP</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-yellow-500 mt-1"></i> /sethome 7</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-yellow-500 mt-1"></i> /heal</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-yellow-500 mt-1"></i> /anvil</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-yellow-500 mt-0.5"></i> <span>Dapat mengatur /sethome hingga 7</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-yellow-500 mt-0.5"></i> <span>Pulihkan nyawa instant dengan /heal</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-yellow-500 mt-0.5"></i> <span>Gunakan Anvil portabel kapan saja /anvil</span></li>
                     </ul>
-                    <div class="bg-slate-900 rounded p-3 text-sm border border-slate-700 space-y-2">
-                        <div class="flex justify-between"><span><i class="fa-solid fa-cube text-slate-400"></i> Block Limit:</span> <span class="font-bold text-yellow-400">15.000</span></div>
-                        <div class="flex justify-between"><span><i class="fa-solid fa-house text-slate-400"></i> Claim:</span> <span class="font-bold text-yellow-400">8</span></div>
-                    </div>
                 </div>
-                <button onclick="buyItem('VIP+')" class="w-full mt-6 bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-3 px-4 rounded-lg transition shadow-lg shadow-yellow-900">
-                    Beli Sekarang
-                </button>
+                <div class="mt-auto space-y-4">
+                    <div class="bg-slate-950/80 rounded-xl p-3 text-xs border border-slate-850 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-cube text-yellow-600/75 mr-1.5"></i> Block Limit:</span> 
+                            <span class="font-bold text-yellow-400">15.000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-house-circle-check text-yellow-600/75 mr-1.5"></i> Claim Limit:</span> 
+                            <span class="font-bold text-yellow-400">8</span>
+                        </div>
+                    </div>
+                    <button onclick="openCheckoutModal('VIP+')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-3.5 rounded-xl transition duration-200 shadow-lg shadow-yellow-900/40">
+                        Beli Sekarang
+                    </button>
+                </div>
             </div>
 
-            <!-- MVP -->
-            <div class="rank-card glow-mvp bg-slate-800 rounded-xl p-6 flex flex-col h-full border border-slate-700">
-                <div class="text-center mb-6">
-                    <h3 class="text-3xl font-display text-orange-500 font-bold mb-2">🏆 MVP</h3>
-                    <div class="text-2xl font-bold text-white price-display" data-trial="Rp 55.000" data-perm="Rp 75.000">Rp 55.000</div>
-                    <p class="text-sm text-slate-400 mt-1 duration-label">1 Bulan</p>
+            <!-- MVP RANK -->
+            <div class="rank-card glow-mvp bg-slate-900/60 backdrop-blur rounded-2xl p-6 flex flex-col h-full relative overflow-hidden">
+                <div class="text-center mb-6 border-b border-slate-800/60 pb-5">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-orange-950/50 text-orange-400 mb-2 inline-block">Elite Rank</span>
+                    <h3 class="text-3.5xl font-display text-orange-500 font-bold tracking-wider">🏆 MVP</h3>
+                    <div class="text-3xl font-extrabold text-white mt-2 item-price" data-trial="Rp 55.000" data-perm="Rp 75.000">Rp 55.000</div>
+                    <p class="text-xs text-slate-400 mt-1 uppercase duration-sub">1 Bulan</p>
                 </div>
                 <div class="flex-grow">
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-bold mb-3">Termasuk Semua Fitur VIP+ +</p>
                     <ul class="space-y-3 text-sm text-slate-300 mb-6">
-                        <li class="flex items-start gap-2 text-orange-400"><i class="fa-solid fa-plus mt-1"></i> Semua fitur VIP+</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i> /sethome 10</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i> /time</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i> /weather</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-orange-500 mt-1"></i> /ec</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-orange-500 mt-0.5"></i> <span>Dapat mengatur /sethome hingga 10</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-orange-500 mt-0.5"></i> <span>Kendalikan waktu dengan perintah /time</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-orange-500 mt-0.5"></i> <span>Kendalikan cuaca dengan perintah /weather</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-orange-500 mt-0.5"></i> <span>Buka Ender Chest portabel via /ec</span></li>
                     </ul>
-                    <div class="bg-slate-900 rounded p-3 text-sm border border-slate-700 space-y-2">
-                        <div class="flex justify-between"><span><i class="fa-solid fa-cube text-slate-400"></i> Block Limit:</span> <span class="font-bold text-orange-500">20.000</span></div>
-                        <div class="flex justify-between"><span><i class="fa-solid fa-house text-slate-400"></i> Claim:</span> <span class="font-bold text-orange-500">10</span></div>
-                    </div>
                 </div>
-                <button onclick="buyItem('MVP')" class="w-full mt-6 bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 px-4 rounded-lg transition shadow-lg shadow-orange-900">
-                    Beli Sekarang
-                </button>
+                <div class="mt-auto space-y-4">
+                    <div class="bg-slate-950/80 rounded-xl p-3 text-xs border border-slate-850 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-cube text-orange-600/75 mr-1.5"></i> Block Limit:</span> 
+                            <span class="font-bold text-orange-500">20.000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-house-circle-check text-orange-600/75 mr-1.5"></i> Claim Limit:</span> 
+                            <span class="font-bold text-orange-500">10</span>
+                        </div>
+                    </div>
+                    <button onclick="openCheckoutModal('MVP')" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3.5 rounded-xl transition duration-200 shadow-lg shadow-orange-900/40">
+                        Beli Sekarang
+                    </button>
+                </div>
             </div>
 
-            <!-- LEGENDARY -->
-            <div class="rank-card glow-legendary bg-slate-800 rounded-xl p-6 flex flex-col h-full border border-slate-700 relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULER</div>
-                <div class="text-center mb-6 mt-2">
-                    <h3 class="text-3xl font-display text-purple-400 font-bold mb-2">👑 LEGENDARY</h3>
-                    <div class="text-2xl font-bold text-white price-display" data-trial="Rp 190.000" data-perm="Rp 255.000">Rp 190.000</div>
-                    <p class="text-sm text-slate-400 mt-1 duration-label">1 Bulan</p>
+            <!-- LEGENDARY RANK -->
+            <div class="rank-card glow-legendary bg-slate-900/60 backdrop-blur rounded-2xl p-6 flex flex-col h-full relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-extrabold px-3.5 py-1.5 rounded-bl-xl tracking-wider shadow">MOST POPULAR</div>
+                <div class="text-center mb-6 border-b border-slate-800/60 pb-5 mt-2">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-purple-950/50 text-purple-400 mb-2 inline-block">Best Value</span>
+                    <h3 class="text-3.5xl font-display text-purple-400 font-bold tracking-wider">👑 LEGENDARY</h3>
+                    <div class="text-3xl font-extrabold text-white mt-2 item-price" data-trial="Rp 190.000" data-perm="Rp 255.000">Rp 190.000</div>
+                    <p class="text-xs text-slate-400 mt-1 uppercase duration-sub">1 Bulan</p>
                 </div>
                 <div class="flex-grow">
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-bold mb-3">Termasuk Semua Fitur MVP +</p>
                     <ul class="space-y-3 text-sm text-slate-300 mb-6">
-                        <li class="flex items-start gap-2 text-purple-300"><i class="fa-solid fa-plus mt-1"></i> Semua fitur MVP</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i> /sethome 15</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i> /fly</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i> /repair</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-500 mt-1"></i> /nick</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-purple-500 mt-0.5"></i> <span>Dapat mengatur /sethome hingga 15</span></li>
+                        <li class="flex items-start gap-2.5 text-purple-300 font-medium"><i class="fa-solid fa-plane text-purple-500 mt-0.5"></i> <span>Gunakan kebebasan terbang via /fly</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-purple-500 mt-0.5"></i> <span>Perbaiki peralatan yang rusak lewat /repair</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-purple-500 mt-0.5"></i> <span>Buat nama panggilan kustom via /nick</span></li>
                     </ul>
-                    <div class="bg-slate-900 rounded p-3 text-sm border border-slate-700 space-y-2">
-                        <div class="flex justify-between"><span><i class="fa-solid fa-cube text-slate-400"></i> Block Limit:</span> <span class="font-bold text-purple-400">30.000</span></div>
-                        <div class="flex justify-between"><span><i class="fa-solid fa-house text-slate-400"></i> Claim:</span> <span class="font-bold text-purple-400">15</span></div>
-                    </div>
                 </div>
-                <button onclick="buyItem('LEGENDARY')" class="w-full mt-6 bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-4 rounded-lg transition shadow-lg shadow-purple-900">
-                    Beli Sekarang
-                </button>
+                <div class="mt-auto space-y-4">
+                    <div class="bg-slate-950/80 rounded-xl p-3 text-xs border border-slate-850 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-cube text-purple-600/75 mr-1.5"></i> Block Limit:</span> 
+                            <span class="font-bold text-purple-400">30.000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-house-circle-check text-purple-600/75 mr-1.5"></i> Claim Limit:</span> 
+                            <span class="font-bold text-purple-400">15</span>
+                        </div>
+                    </div>
+                    <button onclick="openCheckoutModal('LEGENDARY')" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 rounded-xl transition duration-200 shadow-lg shadow-purple-900/40">
+                        Beli Sekarang
+                    </button>
+                </div>
             </div>
 
-            <!-- DIVINE -->
-            <div class="rank-card glow-divine bg-slate-800 rounded-xl p-6 flex flex-col h-full border border-slate-700">
-                <div class="text-center mb-6">
-                    <h3 class="text-3xl font-display text-red-500 font-bold mb-2">🔥 DIVINE</h3>
-                    <div class="text-2xl font-bold text-white price-display" data-trial="Rp 250.000" data-perm="Rp 355.000">Rp 250.000</div>
-                    <p class="text-sm text-slate-400 mt-1 duration-label">1 Bulan</p>
+            <!-- DIVINE RANK -->
+            <div class="rank-card glow-divine bg-slate-900/60 backdrop-blur rounded-2xl p-6 flex flex-col h-full relative overflow-hidden">
+                <div class="text-center mb-6 border-b border-slate-800/60 pb-5">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-red-950/50 text-red-400 mb-2 inline-block">GOD-TIER RANK</span>
+                    <h3 class="text-3.5xl font-display text-red-500 font-bold tracking-wider">🔥 DIVINE</h3>
+                    <div class="text-3xl font-extrabold text-white mt-2 item-price" data-trial="Rp 250.000" data-perm="Rp 355.000">Rp 250.000</div>
+                    <p class="text-xs text-slate-400 mt-1 uppercase duration-sub">1 Bulan</p>
                 </div>
                 <div class="flex-grow">
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-bold mb-3">Termasuk Semua Fitur LEGENDARY +</p>
                     <ul class="space-y-3 text-sm text-slate-300 mb-6">
-                        <li class="flex items-start gap-2 text-red-400"><i class="fa-solid fa-plus mt-1"></i> Semua fitur LEGENDARY</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> /sethome 20</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> /tp</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> /repair all</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-red-500 mt-1"></i> /flyspeed</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-red-500 mt-0.5"></i> <span>Dapat mengatur /sethome hingga 20</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-red-500 mt-0.5"></i> <span>Teleportasi instant ke player mana saja /tp</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-red-500 mt-0.5"></i> <span>Perbaiki semua barang sekaligus /repair all</span></li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-red-500 mt-0.5"></i> <span>Ganti kecepatan terbang sesukamu /flyspeed</span></li>
                     </ul>
-                    <div class="bg-slate-900 rounded p-3 text-sm border border-slate-700 space-y-2">
-                        <div class="flex justify-between"><span><i class="fa-solid fa-cube text-slate-400"></i> Block Limit:</span> <span class="font-bold text-red-500">100.000</span></div>
-                        <div class="flex justify-between"><span><i class="fa-solid fa-house text-slate-400"></i> Claim:</span> <span class="font-bold text-red-500">100</span></div>
-                    </div>
                 </div>
-                <button onclick="buyItem('DIVINE')" class="w-full mt-6 bg-red-600 hover:bg-red-500 text-white font-bold py-3 px-4 rounded-lg transition shadow-lg shadow-red-900">
-                    Beli Sekarang
-                </button>
+                <div class="mt-auto space-y-4">
+                    <div class="bg-slate-950/80 rounded-xl p-3 text-xs border border-slate-850 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-cube text-red-600/75 mr-1.5"></i> Block Limit:</span> 
+                            <span class="font-bold text-red-500">100.000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 font-semibold"><i class="fa-solid fa-house-circle-check text-red-600/75 mr-1.5"></i> Claim Limit:</span> 
+                            <span class="font-bold text-red-500">100</span>
+                        </div>
+                    </div>
+                    <button onclick="openCheckoutModal('DIVINE')" class="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3.5 rounded-xl transition duration-200 shadow-lg shadow-red-900/40">
+                        Beli Sekarang
+                    </button>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Extra Items Section -->
-    <section id="items" class="bg-slate-900 py-16 border-t border-slate-800">
+    <!-- Extra Items Section (Gacha Keys) -->
+    <section id="items" class="bg-slate-950/60 py-20 border-t border-slate-900">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-display font-bold text-white mb-2">Item Lainnya</h2>
-                <p class="text-slate-400">Tingkatkan resource kamu dengan membeli kunci gacha.</p>
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-950/40 border border-amber-800/30 px-3.5 py-1.5 rounded-full mb-3 inline-block">GACHA & LUCK</span>
+                <h2 class="text-4xl md:text-5xl font-display font-black text-white mb-3">EVERMINE CRATE KEYS</h2>
+                <p class="text-slate-400 max-w-md mx-auto">Tingkatkan resource dan berkesempatan mendapatkan armor & item Overpowered (OP).</p>
             </div>
             
-            <div class="max-w-sm mx-auto">
-                <div class="bg-slate-800 rounded-xl p-6 flex flex-col items-center border border-slate-700 hover:-translate-y-2 transition duration-300">
-                    <i class="fa-solid fa-key text-6xl text-amber-400 mb-4 drop-shadow-[0_0_15px_rgba(251,191,36,0.5)]"></i>
-                    <h3 class="text-2xl font-display font-bold text-white mb-1">KEY SHOP INSANE</h3>
-                    <p class="text-xl font-bold text-amber-400 mb-4">Rp 4.500 <span class="text-sm text-slate-400 font-normal">/ 1 Key</span></p>
-                    <p class="text-center text-sm text-slate-400 mb-6">Kunci untuk membuka crate Insane di spawn. Berkesempatan mendapatkan item langka dan OP!</p>
-                    <button onclick="buyOther('Key Shop Insane', 'Rp 4.500')" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold py-3 px-4 rounded-lg transition">
-                        Beli Key
+            <div class="max-w-md mx-auto">
+                <div class="bg-slate-900/50 backdrop-blur-sm rounded-2xl p-8 flex flex-col items-center border border-slate-800 hover:border-amber-500/20 transition-all duration-300 shadow-xl group">
+                    <!-- Key Icon with glow effect -->
+                    <div class="relative w-24 h-24 flex items-center justify-center mb-6">
+                        <div class="absolute inset-0 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition-all"></div>
+                        <i class="fa-solid fa-key text-5xl text-amber-400 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)] transform -rotate-45 group-hover:rotate-12 transition-transform duration-500"></i>
+                    </div>
+                    
+                    <h3 class="text-3xl font-display font-black text-white mb-2 tracking-wide text-center">KEY SHOP INSANE</h3>
+                    <div class="flex items-baseline gap-2 mb-4">
+                        <span class="text-3xl font-extrabold text-amber-400">Rp 4.500</span>
+                        <span class="text-sm text-slate-500 font-medium">/ 1 Kunci</span>
+                    </div>
+                    
+                    <p class="text-center text-sm text-slate-400 leading-relaxed mb-8">
+                        Kunci khusus untuk membuka kotak rahasia di Spawn area. Menangkan item langka, senjata mematikan, dan material berharga tinggi!
+                    </p>
+                    
+                    <!-- Form inputs to select quantity -->
+                    <div class="w-full mb-6">
+                        <label class="block text-xs font-bold uppercase text-slate-500 tracking-wider mb-2 text-center">Jumlah Pembelian</label>
+                        <div class="flex items-center max-w-[150px] mx-auto bg-slate-950 border border-slate-800 rounded-xl p-1">
+                            <button onclick="decrementQty()" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white transition rounded-lg hover:bg-slate-900">-</button>
+                            <input type="number" id="key-qty" value="1" min="1" class="w-12 bg-transparent text-center font-bold focus:outline-none text-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" readonly>
+                            <button onclick="incrementQty()" class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-white transition rounded-lg hover:bg-slate-900">+</button>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openKeyCheckoutModal()" class="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-extrabold py-4 rounded-xl transition duration-200 shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20">
+                        Beli Key Sekarang
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Payment & Info -->
-    <section id="contact" class="bg-slate-800 py-16 border-t border-slate-700">
+    <!-- Payment & Info Section -->
+    <section id="contact" class="bg-slate-900/50 py-20 border-t border-slate-900 relative">
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl"></div>
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-display font-bold text-white mb-8">Metode Pembayaran</h2>
-            <div class="flex justify-center mb-8">
-                <!-- Ikon/Text QRIS Placeholder -->
-                <div class="bg-white rounded-xl p-6 flex items-center gap-4 border-4 border-slate-300">
-                    <i class="fa-solid fa-qrcode text-5xl text-blue-800"></i>
-                    <div class="text-left text-slate-900">
-                        <p class="font-bold text-2xl">QRIS</p>
-                        <p class="text-sm font-semibold">All Payment Accepted</p>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-800/40 border border-slate-700/30 px-3.5 py-1.5 rounded-full mb-3 inline-block">SECURE PAYMENTS</span>
+            <h2 class="text-3xl md:text-5xl font-display font-black text-white mb-10">SISTEM METODE PEMBAYARAN</h2>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 max-w-3xl mx-auto mb-16">
+                <!-- QRIS Box -->
+                <div class="w-full md:w-1/2 bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col items-center shadow-lg hover:border-emerald-500/20 transition-colors">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-4 text-emerald-400 border border-emerald-500/10">
+                        <i class="fa-solid fa-qrcode text-3xl"></i>
                     </div>
+                    <p class="font-bold text-xl text-white mb-1">QRIS Dinamis</p>
+                    <p class="text-xs text-slate-400 text-center px-4">Mendukung semua e-wallet (OVO, GoPay, Dana, LinkAja, ShopeePay) serta aplikasi perbankan m-Banking.</p>
+                </div>
+                
+                <!-- Instant Process Box -->
+                <div class="w-full md:w-1/2 bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col items-center shadow-lg hover:border-emerald-500/20 transition-colors">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-4 text-cyan-400 border border-cyan-500/10">
+                        <i class="fa-solid fa-bolt text-3xl"></i>
+                    </div>
+                    <p class="font-bold text-xl text-white mb-1">Proses Manual Admin</p>
+                    <p class="text-xs text-slate-400 text-center px-4">Proses pembelian divalidasi langsung oleh admin server melalui WhatsApp untuk memastikan keamanan 100%.</p>
                 </div>
             </div>
             
-            <div class="max-w-2xl mx-auto bg-slate-900 rounded-xl p-8 border border-slate-700 shadow-xl mt-8">
-                <h3 class="text-xl font-bold text-white mb-4">Butuh Bantuan atau Manual Transfer?</h3>
-                <p class="text-slate-400 mb-6">Proses pembelian dilakukan secara manual melalui WhatsApp admin untuk memastikan keamanan transaksi.</p>
+            <!-- Admin Help Box -->
+            <div class="max-w-2xl mx-auto bg-slate-950/80 backdrop-blur rounded-2xl p-8 border border-slate-800/80 shadow-2xl relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Layanan Bantuan</div>
+                <h3 class="text-2xl font-bold text-white mb-3">Butuh Bantuan Lebih Lanjut?</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-8">Apabila mengalami kesulitan dalam pembelian atau ingin melakukan transfer manual secara langsung, hubungi kami:</p>
+                
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="https://wa.me/628975293251" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-lg transition flex items-center justify-center gap-2">
+                    <a href="https://wa.me/628975293251" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-6 rounded-xl transition flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-950">
                         <i class="fa-brands fa-whatsapp text-xl"></i> Chat Admin (08975293251)
                     </a>
-                    <a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" target="_blank" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg transition flex items-center justify-center gap-2 border border-slate-600">
-                        <i class="fa-solid fa-users text-xl"></i> Gabung Grup WA
+                    <a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" target="_blank" class="bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold py-3.5 px-6 rounded-xl transition flex items-center justify-center gap-2.5 border border-slate-800">
+                        <i class="fa-solid fa-users text-xl"></i> Join Group Player
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Custom Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="modal-container">
+            <!-- Modal Header -->
+            <div class="bg-slate-950 px-6 py-4 flex items-center justify-between border-b border-slate-850">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-shopping-cart text-emerald-500"></i> Formulir Pembelian
+                </h3>
+                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-1 hover:bg-slate-850 rounded-lg transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6 space-y-4">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-850">
+                    <p class="text-xs text-slate-500 uppercase font-bold tracking-wider">Detail Pembelian</p>
+                    <div class="flex justify-between items-center mt-2">
+                        <p class="font-bold text-white text-lg" id="modal-item-name">RANK LEGENDARY</p>
+                        <p class="font-bold text-emerald-400 text-lg" id="modal-item-price">Rp 190.000</p>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1" id="modal-item-duration">Durasi: 1 Bulan (Trial)</p>
+                </div>
+                
+                <div class="space-y-1.5">
+                    <label for="mc-username" class="block text-xs font-bold uppercase text-slate-400 tracking-wider">Username Minecraft Anda</label>
+                    <input type="text" id="mc-username" placeholder="Masukkan Nickname Minecraft..." class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-xl px-4 py-3.5 text-white placeholder-slate-600 focus:outline-none text-sm transition-all">
+                    <p class="text-[11px] text-slate-500">Pastikan ejaan karakter besar/kecil nickname Anda sudah benar.</p>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-slate-950 px-6 py-4 flex flex-col gap-2 border-t border-slate-850">
+                <button onclick="submitCheckout()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-950">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Lanjutkan ke WhatsApp
+                </button>
+                <p class="text-[10px] text-slate-500 text-center mt-1">Anda akan diarahkan langsung ke percakapan Admin WA kami.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notifications (Floating message boxes instead of alert) -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-3 pointer-events-none max-w-xs"></div>
+
     <!-- Footer -->
-    <footer class="bg-slate-950 py-8 border-t border-slate-800">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-slate-500 font-bold font-display text-xl mb-2">EVERMINE STORE</p>
-            <p class="text-slate-600 text-sm">
-                &copy; 2026 Evermine Server. All rights reserved.<br>
-                Kami tidak berafiliasi dengan Mojang AB.
+    <footer class="bg-[#05070a] py-10 border-t border-slate-900 text-center relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="text-2xl font-display font-black text-white mb-3">
+                EVERMINE<span class="text-emerald-500">SMP</span>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed max-w-md mx-auto mb-6">
+                &copy; 2026 Evermine Server. Hak Cipta Dilindungi.<br>
+                Kami tidak memiliki hubungan kerja sama atau berafiliasi dengan Mojang Studios AB.
             </p>
+            <div class="h-px bg-slate-950 max-w-xs mx-auto mb-6"></div>
+            <p class="text-[10px] text-slate-700 uppercase tracking-widest">Designed for Evermine Players</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts & Interactivity -->
     <script>
-        let currentDuration = 'trial'; // 'trial' atau 'perm'
+        // Global variables
+        let currentDuration = 'trial'; // Default: 'trial' or 'perm'
+        let selectedItemType = 'rank'; // 'rank' or 'key'
+        let selectedItemName = '';
+        let selectedItemPrice = '';
+        const adminWA = "628975293251";
 
-        // Mengubah Harga berdasarkan Toggle 1 Bulan / Permanen
-        function setDuration(type) {
+        // Navigation Menu Toggle (Mobile)
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-xl';
+            }
+        }
+
+        // Change Duration Toggle (Trial / Permanent)
+        function changeDuration(type) {
             currentDuration = type;
-            const btnTrial = document.getElementById('btn-trial');
-            const btnPerm = document.getElementById('btn-perm');
-            const priceDisplays = document.querySelectorAll('.price-display');
-            const durationLabels = document.querySelectorAll('.duration-label');
+            const toggleTrial = document.getElementById('toggle-trial');
+            const togglePerm = document.getElementById('toggle-perm');
+            
+            const priceElements = document.querySelectorAll('.item-price');
+            const durationLabels = document.querySelectorAll('.duration-sub');
 
             if (type === 'trial') {
-                // Style tombol aktif
-                btnTrial.classList.replace('text-slate-400', 'text-white');
-                btnTrial.classList.replace('hover:text-white', 'shadow');
-                btnTrial.classList.add('bg-emerald-600');
+                // Update Button Active state
+                toggleTrial.className = "px-6 py-2.5 rounded-xl text-sm font-bold bg-emerald-600 text-white shadow transition-all duration-300";
+                togglePerm.className = "px-6 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300";
                 
-                // Style tombol pasif
-                btnPerm.classList.replace('text-white', 'text-slate-400');
-                btnPerm.classList.replace('shadow', 'hover:text-white');
-                btnPerm.classList.remove('bg-emerald-600');
-
-                // Update text
-                priceDisplays.forEach(el => {
-                    el.textContent = el.getAttribute('data-trial');
+                // Update Card Prices & Labels
+                priceElements.forEach(el => {
+                    const trialPrice = el.getAttribute('data-trial');
+                    el.textContent = trialPrice;
                 });
+                
                 durationLabels.forEach(el => {
-                    // Member label stays 'Selamanya', others change
-                    if(el.closest('.rank-card').querySelector('h3').textContent.includes('MEMBER')) {
+                    const cardTitle = el.closest('.rank-card').querySelector('h3').textContent;
+                    if (cardTitle.includes('MEMBER')) {
                         el.textContent = "Selamanya";
                     } else {
                         el.textContent = "1 Bulan";
                     }
                 });
             } else {
-                // Style tombol aktif
-                btnPerm.classList.replace('text-slate-400', 'text-white');
-                btnPerm.classList.replace('hover:text-white', 'shadow');
-                btnPerm.classList.add('bg-emerald-600');
+                // Update Button Active state
+                togglePerm.className = "px-6 py-2.5 rounded-xl text-sm font-bold bg-emerald-600 text-white shadow transition-all duration-300";
+                toggleTrial.className = "px-6 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-300";
                 
-                // Style tombol pasif
-                btnTrial.classList.replace('text-white', 'text-slate-400');
-                btnTrial.classList.replace('shadow', 'hover:text-white');
-                btnTrial.classList.remove('bg-emerald-600');
-
-                // Update text
-                priceDisplays.forEach(el => {
-                    el.textContent = el.getAttribute('data-perm');
+                // Update Card Prices & Labels
+                priceElements.forEach(el => {
+                    const permPrice = el.getAttribute('data-perm');
+                    el.textContent = permPrice;
                 });
+                
                 durationLabels.forEach(el => {
                     el.textContent = "Permanen (Selamanya)";
                 });
             }
         }
 
-        // Fungsi Beli (Membuka WhatsApp dengan pesan pre-filled)
-        function buyItem(rankName) {
-            const adminWA = "628975293251";
-            let durationText = currentDuration === 'trial' ? '1 Bulan (Trial)' : 'Permanen';
+        // Key Quantity controls
+        function incrementQty() {
+            const qtyInput = document.getElementById('key-qty');
+            let val = parseInt(qtyInput.value) || 1;
+            qtyInput.value = val + 1;
+        }
+
+        function decrementQty() {
+            const qtyInput = document.getElementById('key-qty');
+            let val = parseInt(qtyInput.value) || 1;
+            if (val > 1) {
+                qtyInput.value = val - 1;
+            }
+        }
+
+        // Checkout Modal Functions
+        function openCheckoutModal(rankName) {
+            selectedItemType = 'rank';
+            selectedItemName = `RANK ${rankName}`;
             
-            // Ambil elemen harga untuk rank yang diklik
+            // Get price from the card according to current selected duration
             const cards = document.querySelectorAll('.rank-card');
             let price = "";
             cards.forEach(card => {
-                if(card.querySelector('h3').textContent.includes(rankName)) {
+                if (card.querySelector('h3').textContent.includes(rankName)) {
                     price = currentDuration === 'trial' ? 
-                            card.querySelector('.price-display').getAttribute('data-trial') : 
-                            card.querySelector('.price-display').getAttribute('data-perm');
+                            card.querySelector('.item-price').getAttribute('data-trial') : 
+                            card.querySelector('.item-price').getAttribute('data-perm');
                 }
             });
-
-            const message = `Halo Admin Evermine Store! 👋\n\nSaya tertarik untuk membeli Rank:\n*Rank:* ${rankName}\n*Durasi:* ${durationText}\n*Harga:* ${price}\n\n*Username Minecraft:* (Isi username kamu disini)\n\nMohon info QRIS untuk pembayarannya ya. Terima kasih!`;
             
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${adminWA}?text=${encodedMessage}`, '_blank');
+            selectedItemPrice = price;
+            
+            // Populate modal
+            document.getElementById('modal-item-name').textContent = selectedItemName;
+            document.getElementById('modal-item-price').textContent = selectedItemPrice;
+            document.getElementById('modal-item-duration').textContent = currentDuration === 'trial' ? 'Durasi: 1 Bulan' : 'Durasi: Permanen (Selamanya)';
+            
+            // Clear username input
+            document.getElementById('mc-username').value = "";
+            
+            // Display modal
+            const modal = document.getElementById('checkout-modal');
+            const container = document.getElementById('modal-container');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                container.classList.remove('scale-95');
+                container.classList.add('scale-100');
+            }, 10);
         }
 
-        // Fungsi Beli Item Lainnya (Keys)
-        function buyOther(itemName, price) {
-            const adminWA = "628975293251";
-            const message = `Halo Admin Evermine Store! 👋\n\nSaya ingin membeli item:\n*Item:* ${itemName}\n*Harga/pcs:* ${price}\n*Jumlah:* (Isi jumlah yang ingin dibeli)\n\n*Username Minecraft:* (Isi username kamu disini)\n\nMohon info total dan QRIS-nya. Terima kasih!`;
+        function openKeyCheckoutModal() {
+            selectedItemType = 'key';
+            const qty = parseInt(document.getElementById('key-qty').value) || 1;
+            selectedItemName = `${qty}x KEY SHOP INSANE`;
             
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${adminWA}?text=${encodedMessage}`, '_blank');
+            // Calculate total key price
+            const singlePrice = 4500;
+            const total = singlePrice * qty;
+            
+            // Format currency
+            const formattedTotal = 'Rp ' + total.toLocaleString('id-ID');
+            selectedItemPrice = formattedTotal;
+            
+            // Populate modal
+            document.getElementById('modal-item-name').textContent = selectedItemName;
+            document.getElementById('modal-item-price').textContent = selectedItemPrice;
+            document.getElementById('modal-item-duration').textContent = 'Kategori: Crate Key';
+            
+            // Clear username input
+            document.getElementById('mc-username').value = "";
+            
+            // Display modal
+            const modal = document.getElementById('checkout-modal');
+            const container = document.getElementById('modal-container');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                container.classList.remove('scale-95');
+                container.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            const container = document.getElementById('modal-container');
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('checkout-modal');
+            if (event.target === modal) {
+                closeCheckoutModal();
+            }
+        }
+
+        // WhatsApp Form Submission
+        function submitCheckout() {
+            const usernameInput = document.getElementById('mc-username').value.trim();
+            if (!usernameInput) {
+                showToast("Mohon masukkan Username Minecraft kamu!", "error");
+                return;
+            }
+            
+            let message = "";
+            if (selectedItemType === 'rank') {
+                const durationText = currentDuration === 'trial' ? '1 Bulan (Trial)' : 'Permanen';
+                message = `Halo Admin Evermine Store! 👋\n\nSaya ingin membeli Rank berikut:\n*Rank:* ${selectedItemName}\n*Durasi:* ${durationText}\n*Harga:* ${selectedItemPrice}\n\n*Username Minecraft:* ${usernameInput}\n\nMohon info instruksi pembayaran / QRIS. Terima kasih!`;
+            } else {
+                message = `Halo Admin Evermine Store! 👋\n\nSaya ingin membeli item berikut:\n*Item:* ${selectedItemName}\n*Total Harga:* ${selectedItemPrice}\n\n*Username Minecraft:* ${usernameInput}\n\nMohon info instruksi pembayaran / QRIS. Terima kasih!`;
+            }
+            
+            const encodedText = encodeURIComponent(message);
+            window.open(`https://wa.me/${adminWA}?text=${encodedText}`, '_blank');
+            closeCheckoutModal();
+            showToast("Membuka WhatsApp Admin...", "success");
+        }
+
+        // Clipboard Copy Helper with elegant custom floating toast notifications
+        function copyToClipboard(text, message) {
+            // Traditional method that works inside iframes/modals
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            showToast(message, "success");
+        }
+
+        // Toast notification handler
+        function showToast(message, type = "success") {
+            const container = document.getElementById('toast-container');
+            
+            // Create notification element
+            const toast = document.createElement('div');
+            toast.className = `flex items-center gap-3 p-4 rounded-xl shadow-lg border transition-all duration-350 transform translate-y-5 opacity-0 scale-90 pointer-events-auto w-full ${
+                type === 'success' 
+                ? 'bg-emerald-950/95 border-emerald-500/30 text-emerald-300' 
+                : 'bg-red-950/95 border-red-500/30 text-red-300'
+            }`;
+            
+            const iconClass = type === 'success' ? 'fa-circle-check text-emerald-400' : 'fa-circle-exclamation text-red-400';
+            toast.innerHTML = `
+                <i class="fa-solid ${iconClass} text-lg"></i>
+                <p class="text-xs font-semibold leading-relaxed">${message}</p>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Animate In
+            setTimeout(() => {
+                toast.classList.remove('translate-y-5', 'opacity-0', 'scale-90');
+                toast.classList.add('translate-y-0', 'opacity-100', 'scale-100');
+            }, 50);
+            
+            // Animate Out & Destroy
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100', 'scale-100');
+                toast.classList.add('translate-y-5', 'opacity-0', 'scale-90');
+                setTimeout(() => {
+                    toast.remove();
+                }, 350);
+            }, 3000);
         }
     </script>
 </body>
