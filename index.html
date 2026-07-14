@@ -1,3 +1,7 @@
+# Update the index.html content to:
+# 1. Add "Mystery Key" price: 1 Key = Rp4.500
+# 2. Add "Checkout" / "Beli" buttons/links
+html_content_updated = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -43,6 +47,15 @@
             color: white; 
         }
         tr:nth-child(even) { background-color: #262626; }
+        .btn-beli { 
+            display: inline-block;
+            background-color: #bd00ff;
+            color: white;
+            padding: 5px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
         .contact-box { 
             text-align: center; 
             margin-top: 20px; 
@@ -58,32 +71,42 @@
 <div class="container">
     <h1>🌍 EVERMINE STORE 🌍</h1>
     
+    <h2>Mystery Key</h2>
+    <table>
+        <thead>
+            <tr><th>Item</th><th>Harga</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>1x Mystery Key</td><td>Rp4.500</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%201x%20Mystery%20Key" class="btn-beli">Beli</a></td></tr>
+        </tbody>
+    </table>
+
     <h2>Rank Trial (1 Bulan)</h2>
     <table>
         <thead>
-            <tr><th>Rank</th><th>Harga</th></tr>
+            <tr><th>Rank</th><th>Harga</th><th>Action</th></tr>
         </thead>
         <tbody>
-            <tr><td>Member</td><td>Gratis</td></tr>
-            <tr><td>VIP</td><td>Rp25.000</td></tr>
-            <tr><td>VIP+</td><td>Rp40.000</td></tr>
-            <tr><td>MVP</td><td>Rp55.000</td></tr>
-            <tr><td>Legendary</td><td>Rp190.000</td></tr>
-            <tr><td>Divine</td><td>Rp250.000</td></tr>
+            <tr><td>Member</td><td>Gratis</td><td>-</td></tr>
+            <tr><td>VIP</td><td>Rp25.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20VIP%20Trial" class="btn-beli">Beli</a></td></tr>
+            <tr><td>VIP+</td><td>Rp40.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20VIP+%20Trial" class="btn-beli">Beli</a></td></tr>
+            <tr><td>MVP</td><td>Rp55.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20MVP%20Trial" class="btn-beli">Beli</a></td></tr>
+            <tr><td>Legendary</td><td>Rp190.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20Legendary%20Trial" class="btn-beli">Beli</a></td></tr>
+            <tr><td>Divine</td><td>Rp250.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20Divine%20Trial" class="btn-beli">Beli</a></td></tr>
         </tbody>
     </table>
 
     <h2>Rank Permanent</h2>
     <table>
         <thead>
-            <tr><th>Rank</th><th>Harga</th></tr>
+            <tr><th>Rank</th><th>Harga</th><th>Action</th></tr>
         </thead>
         <tbody>
-            <tr><td>VIP</td><td>Rp40.000</td></tr>
-            <tr><td>VIP+</td><td>Rp60.000</td></tr>
-            <tr><td>MVP</td><td>Rp85.000</td></tr>
-            <tr><td>Legendary</td><td>Rp255.000</td></tr>
-            <tr><td>Divine</td><td>Rp355.000</td></tr>
+            <tr><td>VIP</td><td>Rp40.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20VIP%20Permanent" class="btn-beli">Beli</a></td></tr>
+            <tr><td>VIP+</td><td>Rp60.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20VIP+%20Permanent" class="btn-beli">Beli</a></td></tr>
+            <tr><td>MVP</td><td>Rp85.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20MVP%20Permanent" class="btn-beli">Beli</a></td></tr>
+            <tr><td>Legendary</td><td>Rp255.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20Legendary%20Permanent" class="btn-beli">Beli</a></td></tr>
+            <tr><td>Divine</td><td>Rp355.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20Divine%20Permanent" class="btn-beli">Beli</a></td></tr>
         </tbody>
     </table>
 
@@ -96,3 +119,8 @@
 
 </body>
 </html>
+"""
+
+# Save to an index.html file
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content_updated)
