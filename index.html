@@ -1,7 +1,3 @@
-# Update the index.html content to:
-# 1. Add "Mystery Key" price: 1 Key = Rp4.500
-# 2. Add "Checkout" / "Beli" buttons/links
-html_content_updated = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -9,118 +5,39 @@ html_content_updated = """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EverMine Store</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            padding: 20px; 
-            line-height: 1.6; 
-            background-color: #0d0d0d; 
-            color: #ffffff; 
-        }
-        .container { 
-            max-width: 800px; 
-            margin: auto; 
-            background: #1a1a1a; 
-            padding: 20px; 
-            border-radius: 15px; 
-            box-shadow: 0 0 20px rgba(128, 0, 128, 0.3); 
-            border: 2px solid #4b0082;
-        }
-        h1, h2 { 
-            color: #bd00ff; 
-            text-align: center; 
-            text-shadow: 2px 2px 4px #000;
-        }
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-bottom: 30px; 
-            color: #ffffff; 
-            border: 1px solid #4b0082;
-        }
-        th, td { 
-            border: 1px solid #4b0082; 
-            padding: 12px; 
-            text-align: center; 
-        }
-        th { 
-            background-color: #4b0082; 
-            color: white; 
-        }
-        tr:nth-child(even) { background-color: #262626; }
-        .btn-beli { 
-            display: inline-block;
-            background-color: #bd00ff;
-            color: white;
-            padding: 5px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .contact-box { 
-            text-align: center; 
-            margin-top: 20px; 
-            padding: 15px;
-            background: #262626;
-            border-radius: 10px;
-        }
-        .contact-box a { color: #bd00ff; text-decoration: none; font-weight: bold; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0a0a0a; color: #fff; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: auto; text-align: center; }
+        
+        /* Header & Title */
+        h1 { color: #00ff88; margin-top: 20px; }
+        .status-badge { background: #1a2e25; color: #00ff88; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; border: 1px solid #00ff88; display: inline-block; margin-bottom: 20px; }
+        
+        /* Buttons */
+        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border-radius: 8px; font-weight: bold; text-decoration: none; cursor: pointer; border: none; }
+        .btn-green { background-color: #00a86b; color: white; }
+        .btn-dark { background-color: #1a1a2e; color: #a0a0c0; border: 1px solid #333; }
+        
+        /* Server Info Box */
+        .info-box { background: #151515; border: 1px solid #333; padding: 20px; border-radius: 12px; margin-top: 30px; text-align: left; }
+        .ip-label { color: #888; font-size: 0.8em; margin-bottom: 5px; }
+        .ip-address { font-size: 1.2em; font-weight: bold; color: #fff; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🌍 EVERMINE STORE 🌍</h1>
-    
-    <h2>Mystery Key</h2>
-    <table>
-        <thead>
-            <tr><th>Item</th><th>Harga</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>1x Mystery Key</td><td>Rp4.500</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%201x%20Mystery%20Key" class="btn-beli">Beli</a></td></tr>
-        </tbody>
-    </table>
+    <div class="status-badge">● EVERMINE SERVER ACTIVE</div>
+    <h1>SUPPORT EVERMINESMP</h1>
+    <p>Dapatkan Rank Eksklusif, EverMine Key, serta beragam keistimewaan menarik untuk mempercepat petualangan bertahan hidupmu di server kami!</p>
 
-    <h2>Rank Trial (1 Bulan)</h2>
-    <table>
-        <thead>
-            <tr><th>Rank</th><th>Harga</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>Member</td><td>Gratis</td><td>-</td></tr>
-            <tr><td>VIP</td><td>Rp25.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20VIP%20Trial" class="btn-beli">Beli</a></td></tr>
-            <tr><td>VIP+</td><td>Rp40.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20VIP+%20Trial" class="btn-beli">Beli</a></td></tr>
-            <tr><td>MVP</td><td>Rp55.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20MVP%20Trial" class="btn-beli">Beli</a></td></tr>
-            <tr><td>Legendary</td><td>Rp190.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20Legendary%20Trial" class="btn-beli">Beli</a></td></tr>
-            <tr><td>Divine</td><td>Rp250.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20Divine%20Trial" class="btn-beli">Beli</a></td></tr>
-        </tbody>
-    </table>
+    <a href="#" class="btn btn-green">Browse Ranks</a>
+    <a href="#" class="btn btn-dark">Beli Crate Keys</a>
 
-    <h2>Rank Permanent</h2>
-    <table>
-        <thead>
-            <tr><th>Rank</th><th>Harga</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>VIP</td><td>Rp40.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20VIP%20Permanent" class="btn-beli">Beli</a></td></tr>
-            <tr><td>VIP+</td><td>Rp60.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20VIP+%20Permanent" class="btn-beli">Beli</a></td></tr>
-            <tr><td>MVP</td><td>Rp85.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20MVP%20Permanent" class="btn-beli">Beli</a></td></tr>
-            <tr><td>Legendary</td><td>Rp255.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20Legendary%20Permanent" class="btn-beli">Beli</a></td></tr>
-            <tr><td>Divine</td><td>Rp355.000</td><td><a href="https://wa.me/628975293251?text=Halo%20Admin,%20saya%20ingin%20beli%20Rank%20Divine%20Permanent" class="btn-beli">Beli</a></td></tr>
-        </tbody>
-    </table>
-
-    <div class="contact-box">
-        <p>💳 Pembayaran: QRIS</p>
-        <p>📞 WhatsApp Admin: 08975293251</p>
-        <p><a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" target="_blank">Klik di sini untuk bergabung ke Grup WhatsApp</a></p>
+    <div class="info-box">
+        <div class="ip-label">IP SERVER</div>
+        <div class="ip-address">play.everminesmp.my.id</div>
     </div>
 </div>
 
 </body>
 </html>
-"""
-
-# Save to an index.html file
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content_updated)
