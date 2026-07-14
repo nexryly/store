@@ -1,67 +1,76 @@
+# Update the index.html to include:
+# 1. "Beli Sekarang" (Buy Now) functionality with quantity selection.
+# 2. A refined design based on the uploaded images (more professional/modern UI).
+# 3. Interactive quantity input that updates the WhatsApp checkout link.
+
+html_content_final = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EverMine Store | Support Server</title>
+    <title>EverMine Store | Professional Store</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #0a0a0a; color: #fff; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: auto; text-align: center; }
+        :root { --primary: #bd00ff; --bg: #0a0a0a; --card: #151515; --text: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 500px; margin: auto; text-align: center; }
         
-        /* Header */
-        h1 { color: #bd00ff; margin-top: 20px; }
-        .status-badge { background: #261a2e; color: #bd00ff; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; border: 1px solid #bd00ff; display: inline-block; margin-bottom: 20px; }
+        .header-box { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #333; margin-bottom: 20px; }
+        h1 { color: var(--primary); margin: 0; }
         
-        /* Tables & Cards */
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #1a1a1a; border-radius: 10px; overflow: hidden; }
-        th, td { border: 1px solid #333; padding: 12px; text-align: center; color: #fff; }
-        th { background-color: #4b0082; }
+        .item-card { background: var(--card); border: 1px solid #333; padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center; }
         
-        /* Buttons */
-        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border-radius: 8px; font-weight: bold; text-decoration: none; cursor: pointer; border: none; }
-        .btn-green { background-color: #00a86b; color: white; }
-        .btn-purple { background-color: #bd00ff; color: white; }
+        .qty-input { width: 50px; padding: 5px; border-radius: 5px; border: none; text-align: center; background: #333; color: white; }
+        .btn-buy { background: var(--primary); color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.9em; }
         
-        /* Info Box */
-        .info-box { background: #151515; border: 1px solid #333; padding: 20px; border-radius: 12px; margin-top: 30px; }
+        .footer-info { margin-top: 30px; font-size: 0.85em; color: #888; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="status-badge">● EVERMINE SERVER ACTIVE</div>
-    <h1>SUPPORT EVERMINESMP</h1>
-    <p>Dapatkan Rank Eksklusif, Insane Key, dan keistimewaan menarik lainnya!</p>
+    <div class="header-box">
+        <h1>EVERMINE STORE</h1>
+        <p>Pilih item dan tentukan jumlahnya</p>
+    </div>
 
-    <h2>Mystery Key</h2>
-    <table>
-        <tr><th>Item</th><th>Harga</th><th>Aksi</th></tr>
-        <tr><td>1x Insane Key</td><td>Rp4.500</td><td><a href="https://wa.me/628975293251" class="btn btn-purple">Beli</a></td></tr>
-    </table>
+    <div id="store-items">
+        <div class="item-card">
+            <div><strong>Mystery Key</strong><br><small>Rp4.500</small></div>
+            <div>
+                <input type="number" id="qty-key" value="1" min="1" class="qty-input">
+                <a href="#" class="btn-buy" onclick="updateLink('key', 4500)">Beli</a>
+            </div>
+        </div>
 
-    <h2>Rank Trial (1 Bulan)</h2>
-    <table>
-        <tr><th>Rank</th><th>Harga</th><th>Aksi</th></tr>
-        <tr><td>VIP</td><td>Rp25.000</td><td><a href="https://wa.me/628975293251" class="btn btn-purple">Beli</a></td></tr>
-        <tr><td>VIP+</td><td>Rp40.000</td><td><a href="https://wa.me/628975293251" class="btn btn-purple">Beli</a></td></tr>
-        <tr><td>MVP</td><td>Rp55.000</td><td><a href="https://wa.me/628975293251" class="btn btn-purple">Beli</a></td></tr>
-    </table>
+        <div class="item-card">
+            <div><strong>VIP Trial (1 Bln)</strong><br><small>Rp25.000</small></div>
+            <div>
+                <input type="number" id="qty-vip" value="1" min="1" class="qty-input">
+                <a href="#" class="btn-buy" onclick="updateLink('vip', 25000)">Beli</a>
+            </div>
+        </div>
+    </div>
 
-    <h2>Rank Permanent</h2>
-    <table>
-        <tr><th>Rank</th><th>Harga</th><th>Aksi</th></tr>
-        <tr><td>VIP</td><td>Rp40.000</td><td><a href="https://wa.me/628975293251" class="btn btn-purple">Beli</a></td></tr>
-        <tr><td>VIP+</td><td>Rp60.000</td><td><a href="https://wa.me/628975293251" class="btn btn-purple">Beli</a></td></tr>
-        <tr><td>MVP</td><td>Rp85.000</td><td><a href="https://wa.me/628975293251" class="btn btn-purple">Beli</a></td></tr>
-        <tr><td>Divine</td><td>Rp355.000</td><td><a href="https://wa.me/628975293251" class="btn btn-purple">Beli</a></td></tr>
-    </table>
-
-    <div class="info-box">
-        <p><strong>IP SERVER:</strong> play.everminesmp.my.id</p>
-        <p><strong>WA Admin:</strong> 08975293251</p>
-        <a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" class="btn btn-green">Gabung Grup WhatsApp</a>
+    <div class="footer-info">
+        <p>Klik tombol "Beli" untuk melanjutkan ke WhatsApp admin.</p>
+        <p>IP: play.everminesmp.my.id</p>
     </div>
 </div>
 
+<script>
+    function updateLink(item, price) {
+        const qty = document.getElementById('qty-' + item).value;
+        const total = qty * price;
+        const message = `Halo Admin, saya ingin beli ${qty}x ${item} seharga Rp${total.toLocaleString('id-ID')}.`;
+        const url = `https://wa.me/628975293251?text=${encodeURIComponent(message)}`;
+        window.location.href = url;
+    }
+</script>
+
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content_final)
