@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EverMine Store</title>
     <style>
-        /* Black and Purple Theme */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             padding: 20px; 
@@ -22,7 +21,7 @@
             box-shadow: 0 0 20px rgba(128, 0, 128, 0.3); 
             border: 2px solid #4b0082;
         }
-        h1 { 
+        h1, h2 { 
             color: #bd00ff; 
             text-align: center; 
             text-shadow: 2px 2px 4px #000;
@@ -30,7 +29,7 @@
         table { 
             width: 100%; 
             border-collapse: collapse; 
-            margin-top: 20px; 
+            margin-bottom: 30px; 
             color: #ffffff; 
             border: 1px solid #4b0082;
         }
@@ -44,12 +43,14 @@
             color: white; 
         }
         tr:nth-child(even) { background-color: #262626; }
-        .footer { 
+        .contact-box { 
             text-align: center; 
             margin-top: 20px; 
-            font-style: italic; 
-            color: #c0c0c0; 
+            padding: 15px;
+            background: #262626;
+            border-radius: 10px;
         }
+        .contact-box a { color: #bd00ff; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -57,26 +58,39 @@
 <div class="container">
     <h1>🌍 EVERMINE STORE 🌍</h1>
     
+    <h2>Rank Trial (1 Bulan)</h2>
     <table>
         <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Trial (1 Bulan)</th>
-                <th>Permanent</th>
-            </tr>
+            <tr><th>Rank</th><th>Harga</th></tr>
         </thead>
         <tbody>
-            <tr><td>Member</td><td>Gratis</td><td>-</td></tr>
-            <tr><td>VIP</td><td>Rp25.000</td><td>Rp40.000</td></tr>
-            <tr><td>VIP+</td><td>Rp40.000</td><td>Rp60.000</td></tr>
-            <tr><td>MVP</td><td>Rp55.000</td><td>Rp85.000</td></tr>
-            <tr><td>Legendary</td><td>Rp190.000</td><td>Rp255.000</td></tr>
-            <tr><td>Divine</td><td>Rp250.000</td><td>Rp355.000</td></tr>
+            <tr><td>Member</td><td>Gratis</td></tr>
+            <tr><td>VIP</td><td>Rp25.000</td></tr>
+            <tr><td>VIP+</td><td>Rp40.000</td></tr>
+            <tr><td>MVP</td><td>Rp55.000</td></tr>
+            <tr><td>Legendary</td><td>Rp190.000</td></tr>
+            <tr><td>Divine</td><td>Rp250.000</td></tr>
         </tbody>
     </table>
 
-    <div class="footer">
-        <p>💳 Pembayaran: QRIS | Hubungi admin untuk PM pembelian</p>
+    <h2>Rank Permanent</h2>
+    <table>
+        <thead>
+            <tr><th>Rank</th><th>Harga</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>VIP</td><td>Rp40.000</td></tr>
+            <tr><td>VIP+</td><td>Rp60.000</td></tr>
+            <tr><td>MVP</td><td>Rp85.000</td></tr>
+            <tr><td>Legendary</td><td>Rp255.000</td></tr>
+            <tr><td>Divine</td><td>Rp355.000</td></tr>
+        </tbody>
+    </table>
+
+    <div class="contact-box">
+        <p>💳 Pembayaran: QRIS</p>
+        <p>📞 WhatsApp Admin: 08975293251</p>
+        <p><a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" target="_blank">Klik di sini untuk bergabung ke Grup WhatsApp</a></p>
     </div>
 </div>
 
