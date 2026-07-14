@@ -1,70 +1,153 @@
-# Update the index.html to include:
-# 1. "Beli Sekarang" (Buy Now) functionality with quantity selection.
-# 2. A refined design based on the uploaded images (more professional/modern UI).
-# 3. Interactive quantity input that updates the WhatsApp checkout link.
+# Membuat file index.html dengan tema ungu sesuai referensi gambar yang dikirimkan (WhatsApp Image 2026-07-14 at 16.15.53.jpeg)
+# Tema ungu dengan tombol "Beli Sekarang", sistem kuantitas, dan desain modern.
 
-html_content_final = """
+html_content = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EverMine Store | Professional Store</title>
+    <title>EverMine Store | Purple Theme</title>
     <style>
-        :root { --primary: #bd00ff; --bg: #0a0a0a; --card: #151515; --text: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 500px; margin: auto; text-align: center; }
-        
-        .header-box { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid #333; margin-bottom: 20px; }
-        h1 { color: var(--primary); margin: 0; }
-        
-        .item-card { background: var(--card); border: 1px solid #333; padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center; }
-        
-        .qty-input { width: 50px; padding: 5px; border-radius: 5px; border: none; text-align: center; background: #333; color: white; }
-        .btn-buy { background: var(--primary); color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.9em; }
-        
-        .footer-info { margin-top: 30px; font-size: 0.85em; color: #888; }
+        :root {
+            --bg-color: #0f0b15;
+            --card-bg: #1c1526;
+            --accent-purple: #8a2be2;
+            --text-color: #ffffff;
+            --button-color: #9370db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .item-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .item-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1em;
+        }
+
+        .item-info p {
+            margin: 0;
+            color: #ccc;
+            font-size: 0.9em;
+        }
+
+        .action-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .qty-input {
+            width: 40px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background: #332a40;
+            color: white;
+            text-align: center;
+        }
+
+        .btn-buy {
+            background-color: var(--button-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            background-color: var(--accent-purple);
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-box">
-        <h1>EVERMINE STORE</h1>
-        <p>Pilih item dan tentukan jumlahnya</p>
+    <div class="header">
+        <h1>EverMine Store</h1>
+        <p>Pilih Produk & Beli Sekarang</p>
     </div>
 
-    <div id="store-items">
-        <div class="item-card">
-            <div><strong>Insane Key</strong><br><small>Rp4.500</small></div>
-            <div>
-                <input type="number" id="qty-key" value="1" min="1" class="qty-input">
-                <a href="#" class="btn-buy" onclick="updateLink('key', 4500)">Beli</a>
-            </div>
+    <div class="item-card">
+        <div class="item-info">
+            <h3>Mystery Key</h3>
+            <p>Harga: Rp4.500</p>
         </div>
-
-        <div class="item-card">
-            <div><strong>VIP Trial (1 Bln)</strong><br><small>Rp25.000</small></div>
-            <div>
-                <input type="number" id="qty-vip" value="1" min="1" class="qty-input">
-                <a href="#" class="btn-buy" onclick="updateLink('vip', 25000)">Beli</a>
-            </div>
+        <div class="action-box">
+            <input type="number" id="qty-key" value="1" min="1" class="qty-input">
+            <a href="#" class="btn-buy" onclick="checkout('Mystery Key', 4500, 'key')">Beli Sekarang</a>
         </div>
     </div>
 
-    <div class="footer-info">
-        <p>Klik tombol "Beli" untuk melanjutkan ke WhatsApp admin.</p>
-        <p>IP: play.everminesmp.my.id</p>
+    <div class="item-card">
+        <div class="item-info">
+            <h3>VIP Trial (1 Bln)</h3>
+            <p>Harga: Rp25.000</p>
+        </div>
+        <div class="action-box">
+            <input type="number" id="qty-vip" value="1" min="1" class="qty-input">
+            <a href="#" class="btn-buy" onclick="checkout('VIP Trial', 25000, 'vip')">Beli Sekarang</a>
+        </div>
+    </div>
+
+    <div class="item-card">
+        <div class="item-info">
+            <h3>Rank Slayer</h3>
+            <p>Harga: Rp80.000</p>
+        </div>
+        <div class="action-box">
+            <input type="number" id="qty-slayer" value="1" min="1" class="qty-input">
+            <a href="#" class="btn-buy" onclick="checkout('Rank Slayer', 80000, 'slayer')">Beli Sekarang</a>
+        </div>
     </div>
 </div>
 
 <script>
-    function updateLink(item, price) {
-        const qty = document.getElementById('qty-' + item).value;
+    function checkout(itemName, price, id) {
+        const qty = document.getElementById('qty-' + id).value;
         const total = qty * price;
-        const message = `Halo Admin, saya ingin beli ${qty}x ${item} seharga Rp${total.toLocaleString('id-ID')}.`;
-        const url = `https://wa.me/628975293251?text=${encodeURIComponent(message)}`;
-        window.location.href = url;
+        const text = `Halo Admin, saya ingin membeli ${qty}x ${itemName}. Total: Rp${total.toLocaleString('id-ID')}.`;
+        const waUrl = `https://wa.me/628975293251?text=${encodeURIComponent(text)}`;
+        window.open(waUrl, '_blank');
     }
 </script>
 
@@ -73,4 +156,4 @@ html_content_final = """
 """
 
 with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content_final)
+    f.write(html_content)
