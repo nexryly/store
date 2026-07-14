@@ -1,97 +1,1298 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EverMineSMP Store</title>
-    <style>
-        :root {
-            --bg: #0a0a0a;
-            --card: #141414;
-            --purple: #8b5cf6;
-            --purple-glow: rgba(139, 92, 246, 0.4);
-            --text: #ffffff;
-        }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: auto; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Hero */
-        .hero { text-align: center; padding: 40px 20px; border-bottom: 2px solid #222; }
-        .status { color: #22c55e; font-weight: bold; background: #064e3b; padding: 5px 15px; border-radius: 20px; }
-        
-        /* Card Styles */
-        .card { background: var(--card); border: 1px solid #333; padding: 20px; border-radius: 15px; margin-bottom: 20px; transition: 0.3s; }
-        .card:hover { border-color: var(--purple); box-shadow: 0 0 15px var(--purple-glow); }
-        .badge { font-size: 0.7em; background: #333; padding: 4px 8px; border-radius: 5px; color: var(--purple); }
-        
-        /* Buttons */
-        .btn { display: block; width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; text-align: center; margin-top: 10px; }
-        .btn-purple { background: linear-gradient(90deg, #8b5cf6, #6d28d9); color: white; }
-        .btn-wa { background: #25d366; color: white; text-decoration: none; }
-        
-        /* Inputs */
-        input { width: 100%; padding: 10px; margin: 5px 0; background: #222; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
-    </style>
+<title>EverMine Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#09070f;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* Background Glow */
+
+body::before{
+content:"";
+position:fixed;
+width:600px;
+height:600px;
+background:#7b2cff;
+left:-250px;
+top:-250px;
+filter:blur(180px);
+opacity:.18;
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:600px;
+height:600px;
+background:#b026ff;
+right:-250px;
+bottom:-250px;
+filter:blur(180px);
+opacity:.15;
+z-index:-2;
+}
+
+/* Navbar */
+
+nav{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:18px 8%;
+
+background:rgba(10,10,18,.75);
+
+backdrop-filter:blur(15px);
+
+border-bottom:1px solid rgba(255,255,255,.05);
+
+z-index:999;
+
+}
+
+.logo{
+
+font-size:28px;
+
+font-weight:700;
+
+color:#b026ff;
+
+}
+
+nav ul{
+
+display:flex;
+
+gap:28px;
+
+list-style:none;
+
+}
+
+nav a{
+
+text-decoration:none;
+
+color:white;
+
+font-weight:500;
+
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#b026ff;
+
+}
+
+/* Hero */
+
+.hero{
+
+padding-top:160px;
+padding-bottom:120px;
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:60px;
+font-weight:800;
+
+}
+
+.hero span{
+
+color:#b026ff;
+
+}
+
+.hero p{
+
+margin-top:18px;
+color:#bfbfbf;
+font-size:18px;
+
+}
+
+.server-box{
+
+margin-top:35px;
+
+display:inline-block;
+
+background:#13111c;
+
+padding:20px 35px;
+
+border-radius:15px;
+
+border:1px solid rgba(176,38,255,.35);
+
+box-shadow:0 0 25px rgba(176,38,255,.15);
+
+}
+
+.server-box h3{
+
+margin-bottom:10px;
+
+}
+
+.copy-btn{
+
+margin-top:15px;
+
+padding:12px 28px;
+
+border:none;
+
+border-radius:10px;
+
+background:linear-gradient(90deg,#6a00ff,#b026ff);
+
+color:white;
+
+cursor:pointer;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+.copy-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 0 25px rgba(176,38,255,.5);
+
+}
+
+.buttons{
+
+margin-top:35px;
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.btn{
+
+padding:14px 28px;
+
+border-radius:12px;
+
+text-decoration:none;
+
+font-weight:bold;
+
+color:white;
+
+background:linear-gradient(90deg,#6a00ff,#b026ff);
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 0 30px rgba(176,38,255,.45);
+
+}
+
+section{
+
+padding:90px 8%;
+
+}
+
+.section-title{
+
+text-align:center;
+
+font-size:42px;
+
+margin-bottom:50px;
+
+color:#b026ff;
+
+}
+
+.rank-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+gap:30px;
+
+}
+
+@media(max-width:768px){
+
+.hero h1{
+
+font-size:40px;
+
+}
+
+nav{
+
+padding:16px;
+
+}
+
+nav ul{
+
+gap:15px;
+
+font-size:14px;
+
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<div class="container">
-    <div class="hero">
-        <h1>EverMineSMP</h1>
-        <p class="status">● Server Online</p>
-        <p>IP: play.everminesmp.my.id <button onclick="navigator.clipboard.writeText('play.everminesmp.my.id')">Copy</button></p>
-        <a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" class="btn btn-wa">Join WhatsApp</a>
-    </div>
+<nav>
 
-    <h2>⭐ Rank Trial</h2>
-    <div id="trial-ranks">
-        <!-- Contoh Card Rank -->
-        <div class="card">
-            <span class="badge">STARTER</span>
-            <h3>VIP</h3>
-            <p>Rp25.000 / 30 Hari</p>
-            <button class="btn btn-purple" onclick="checkout('VIP Trial', 25000)">Beli Sekarang</button>
-        </div>
-    </div>
+<div class="logo">🌍 EVERMINE</div>
 
-    <h2>👑 Rank Permanent</h2>
-    <div id="permanent-ranks">
-        <div class="card">
-            <span class="badge">PREMIUM</span>
-            <h3>VIP</h3>
-            <p>Rp40.000</p>
-            <button class="btn btn-purple" onclick="checkout('VIP Permanent', 40000)">Beli Sekarang</button>
-        </div>
-    </div>
+<ul>
 
-    <h2>🗝 EverMine Key</h2>
-    <div class="card">
-        <input type="number" id="key-qty" placeholder="Jumlah Key" oninput="calculateKey()">
-        <input type="text" id="mc-user" placeholder="Username Minecraft">
-        <p>Total: Rp<span id="total-price">0</span></p>
-        <button class="btn btn-purple" onclick="sendKeyCheckout()">Checkout WhatsApp</button>
-    </div>
+<li><a href="#trial">Trial</a></li>
+
+<li><a href="#permanent">Permanent</a></li>
+
+<li><a href="#key">Key</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<h1>EVER<span>MINE</span> STORE</h1>
+
+<p>Support Server EverMineSMP</p>
+
+<div class="server-box">
+
+<h3>🟢 Server Online</h3>
+
+<p><b>IP</b> : play.everminesmp.my.id</p>
+
+<p><b>Port</b> : 25372</p>
+
+<button class="copy-btn"
+onclick="navigator.clipboard.writeText('play.everminesmp.my.id')">
+
+Copy IP
+
+</button>
+
 </div>
 
+<div class="buttons">
+
+<a class="btn"
+href="#trial">
+
+Browse Rank
+
+</a>
+
+<a class="btn"
+href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3">
+
+Join WhatsApp
+
+</a>
+
+</div>
+
+</section>
+<section id="trial">
+
+<h2 class="section-title">
+⭐ RANK TRIAL (30 HARI)
+</h2>
+
+<div class="rank-grid">
+
+<!-- MEMBER -->
+
+<div class="card">
+
+<div class="badge">
+FREE
+</div>
+
+<h2 class="rank-name">
+🟢 MEMBER
+</h2>
+
+<div class="price">
+GRATIS
+</div>
+
+<ul class="features">
+
+<li>/sethome 3</li>
+<li>/spawn</li>
+<li>/home</li>
+<li>/msg</li>
+<li>/tpa</li>
+<li>/tpaaccept</li>
+<li>/bal</li>
+<li>/pay</li>
+<li>/sell</li>
+<li>/help</li>
+<li>/shop</li>
+
+</ul>
+
+<hr>
+
+<p>
+📦 Block Limit
+<b>5.000</b>
+</p>
+
+<p>
+🏡 Claim
+<b>3</b>
+</p>
+
+<a
+class="btn"
+href="https://wa.me/628975293251?text=Halo%20Admin%20EverMine%20Store!%20Saya%20ingin%20mengambil%20Rank%20Member.">
+Claim Gratis
+</a>
+
+</div>
+
+<!-- VIP -->
+
+<div class="card">
+
+<div class="badge">
+STARTER
+</div>
+
+<h2 class="rank-name">
+💎 VIP
+</h2>
+
+<div class="price">
+Rp25.000
+</div>
+
+<ul class="features">
+
+<li>Semua fitur MEMBER</li>
+<li>/sethome 5</li>
+<li>/feed</li>
+<li>/workbench</li>
+
+</ul>
+
+<hr>
+
+<p>
+📦 Block Limit
+<b>10.000</b>
+</p>
+
+<p>
+🏡 Claim
+<b>5</b>
+</p>
+
+<a
+class="btn"
+href="#"
+onclick="checkoutRank('VIP Trial',25000)">
+Beli Sekarang
+</a>
+
+</div>
+
+<!-- VIP+ -->
+
+<div class="card">
+
+<div class="badge">
+PREMIUM
+</div>
+
+<h2 class="rank-name">
+✨ VIP+
+</h2>
+
+<div class="price">
+Rp40.000
+</div>
+
+<ul class="features">
+
+<li>Semua fitur VIP</li>
+<li>/sethome 7</li>
+<li>/heal</li>
+<li>/anvil</li>
+
+</ul>
+
+<hr>
+
+<p>
+📦 Block Limit
+<b>15.000</b>
+</p>
+
+<p>
+🏡 Claim
+<b>8</b>
+</p>
+
+<a
+class="btn"
+href="#"
+onclick="checkoutRank('VIP+ Trial',40000)">
+Beli Sekarang
+</a>
+
+</div>
+
+<!-- MVP -->
+
+<div class="card">
+
+<div class="badge">
+ELITE
+</div>
+
+<h2 class="rank-name">
+🏆 MVP
+</h2>
+
+<div class="price">
+Rp55.000
+</div>
+
+<ul class="features">
+
+<li>Semua fitur VIP+</li>
+<li>/sethome 10</li>
+<li>/time</li>
+<li>/weather</li>
+<li>/ec</li>
+
+</ul>
+
+<hr>
+
+<p>
+📦 Block Limit
+<b>20.000</b>
+</p>
+
+<p>
+🏡 Claim
+<b>10</b>
+</p>
+
+<a
+class="btn"
+href="#"
+onclick="checkoutRank('MVP Trial',55000)">
+Beli Sekarang
+</a>
+
+</div>
+
+<!-- LEGENDARY -->
+
+<div class="card">
+
+<div class="badge">
+GOD-TIER
+</div>
+
+<h2 class="rank-name">
+👑 LEGENDARY
+</h2>
+
+<div class="price">
+Rp190.000
+</div>
+
+<ul class="features">
+
+<li>Semua fitur MVP</li>
+<li>/sethome 15</li>
+<li>/fly</li>
+<li>/repair</li>
+<li>/nick</li>
+
+</ul>
+
+<hr>
+
+<p>
+📦 Block Limit
+<b>30.000</b>
+</p>
+
+<p>
+🏡 Claim
+<b>15</b>
+</p>
+
+<a
+class="btn"
+href="#"
+onclick="checkoutRank('Legendary Trial',190000)">
+Beli Sekarang
+</a>
+
+</div>
+
+<!-- DIVINE -->
+
+<div class="card">
+
+<div class="badge">
+IMMORTAL
+</div>
+
+<h2 class="rank-name">
+🔥 DIVINE
+</h2>
+
+<div class="price">
+Rp250.000
+</div>
+
+<ul class="features">
+
+<li>Semua fitur LEGENDARY</li>
+<li>/sethome 20</li>
+<li>/tp</li>
+<li>/repair all</li>
+<li>/flyspeed</li>
+
+</ul>
+
+<hr>
+
+<p>
+📦 Block Limit
+<b>100.000</b>
+</p>
+
+<p>
+🏡 Claim
+<b>100</b>
+</p>
+
+<a
+class="btn"
+href="#"
+onclick="checkoutRank('Divine Trial',250000)">
+Beli Sekarang
+</a>
+
+</div>
+
+</div>
+
+</section>
+<section id="permanent">
+
+<h2 class="section-title">
+👑 RANK PERMANENT
+</h2>
+
+<div class="rank-grid">
+
+<!-- VIP -->
+
+<div class="card">
+
+<div class="badge">
+PERMANENT
+</div>
+
+<h2 class="rank-name">
+💎 VIP
+</h2>
+
+<div class="price">
+Rp40.000
+</div>
+
+<ul class="features">
+
+<li>✔ Semua fitur MEMBER</li>
+<li>✔ /sethome 5</li>
+<li>✔ /feed</li>
+<li>✔ /workbench</li>
+
+</ul>
+
+<hr>
+
+<p>📦 Block Limit <b>10.000</b></p>
+<p>🏡 Claim <b>5</b></p>
+
+<a class="btn"
+href="#"
+onclick="checkoutRank('VIP Permanent',40000)">
+Beli Sekarang
+</a>
+
+</div>
+
+<!-- VIP+ -->
+
+<div class="card">
+
+<div class="badge">
+POPULAR
+</div>
+
+<h2 class="rank-name">
+✨ VIP+
+</h2>
+
+<div class="price">
+Rp60.000
+</div>
+
+<ul class="features">
+
+<li>✔ Semua fitur VIP</li>
+<li>✔ /sethome 7</li>
+<li>✔ /heal</li>
+<li>✔ /anvil</li>
+
+</ul>
+
+<hr>
+
+<p>📦 Block Limit <b>15.000</b></p>
+<p>🏡 Claim <b>8</b></p>
+
+<a class="btn"
+href="#"
+onclick="checkoutRank('VIP+ Permanent',60000)">
+Beli Sekarang
+</a>
+
+</div>
+
+<!-- MVP -->
+
+<div class="card">
+
+<div class="badge">
+BEST SELLER
+</div>
+
+<h2 class="rank-name">
+🏆 MVP
+</h2>
+
+<div class="price">
+Rp85.000
+</div>
+
+<ul class="features">
+
+<li>✔ Semua fitur VIP+</li>
+<li>✔ /sethome 10</li>
+<li>✔ /time</li>
+<li>✔ /weather</li>
+<li>✔ /ec</li>
+
+</ul>
+
+<hr>
+
+<p>📦 Block Limit <b>20.000</b></p>
+<p>🏡 Claim <b>10</b></p>
+
+<a class="btn"
+href="#"
+onclick="checkoutRank('MVP Permanent',85000)">
+Beli Sekarang
+</a>
+
+</div>
+
+<!-- LEGENDARY -->
+
+<div class="card">
+
+<div class="badge">
+GOD-TIER
+</div>
+
+<h2 class="rank-name">
+👑 LEGENDARY
+</h2>
+
+<div class="price">
+Rp255.000
+</div>
+
+<ul class="features">
+
+<li>✔ Semua fitur MVP</li>
+<li>✔ /sethome 15</li>
+<li>✔ /fly</li>
+<li>✔ /repair</li>
+<li>✔ /nick</li>
+
+</ul>
+
+<hr>
+
+<p>📦 Block Limit <b>30.000</b></p>
+<p>🏡 Claim <b>15</b></p>
+
+<a class="btn"
+href="#"
+onclick="checkoutRank('Legendary Permanent',255000)">
+Beli Sekarang
+</a>
+
+</div>
+
+<!-- DIVINE -->
+
+<div class="card">
+
+<div class="badge">
+IMMORTAL
+</div>
+
+<h2 class="rank-name">
+🔥 DIVINE
+</h2>
+
+<div class="price">
+Rp355.000
+</div>
+
+<ul class="features">
+
+<li>✔ Semua fitur LEGENDARY</li>
+<li>✔ /sethome 20</li>
+<li>✔ /tp</li>
+<li>✔ /repair all</li>
+<li>✔ /flyspeed</li>
+
+</ul>
+
+<hr>
+
+<p>📦 Block Limit <b>100.000</b></p>
+<p>🏡 Claim <b>100</b></p>
+
+<a class="btn"
+href="#"
+onclick="checkoutRank('Divine Permanent',355000)">
+Beli Sekarang
+</a>
+
+</div>
+
+</div>
+
+</section>
+<section id="key">
+
+<h2 class="section-title">
+🗝 EVERMINE KEY
+</h2>
+
+<div class="card">
+
+<div class="badge">
+BEST SELLER
+</div>
+
+<h2 class="rank-name">
+🗝 EverMine Key
+</h2>
+
+<div class="price">
+Rp4.500 / Key
+</div>
+
+<p style="color:#bbb;margin-bottom:20px;">
+Masukkan jumlah key dan username Minecraft untuk checkout.
+</p>
+
+<label>Jumlah Key</label>
+
+<input
+type="number"
+id="keyQty"
+min="1"
+value="1"
+oninput="updateKeyTotal()">
+
+<label>Username Minecraft</label>
+
+<input
+type="text"
+id="mcUsername"
+placeholder="Contoh : Renoir3301">
+
+<div style="margin-top:25px">
+
+<h3>Total Harga</h3>
+
+<h1 id="keyTotal"
+style="color:#b026ff;">
+Rp4.500
+</h1>
+
+</div>
+
+<button
+class="btn"
+style="width:100%;margin-top:25px;"
+onclick="checkoutKey()">
+
+Checkout WhatsApp
+
+</button>
+
+</div>
+
+</section>
+
+<section id="payment">
+
+<h2 class="section-title">
+💳 PEMBAYARAN
+</h2>
+
+<div class="card">
+
+<h2>
+✅ QRIS
+</h2>
+
+<p style="margin-top:15px;color:#bbb;">
+
+Setelah checkout,
+Admin akan mengirim QRIS pembayaran.
+
+</p>
+
+<a
+
+class="btn"
+
+href="https://wa.me/628975293251">
+
+Hubungi Admin
+
+</a>
+
+</div>
+
+</section>
+
 <script>
-    function calculateKey() {
-        let qty = document.getElementById('key-qty').value;
-        document.getElementById('total-price').innerText = (qty * 4500).toLocaleString();
-    }
 
-    function sendKeyCheckout() {
-        let qty = document.getElementById('key-qty').value;
-        let total = qty * 4500;
-        let user = document.getElementById('mc-user').value;
-        let msg = `Halo Admin EverMine Store! 👋\n\nSaya ingin membeli item berikut:\nItem: ${qty}x EVERMINE KEY\nTotal Harga: Rp${total.toLocaleString()}\nUsername Minecraft: ${user}\n\nMohon info instruksi pembayaran / QRIS. Terima kasih!`;
-        window.location.href = `https://wa.me/628975293251?text=${encodeURIComponent(msg)}`;
-    }
+function rupiah(x){
 
-    function checkout(rank, price) {
-        let msg = `Halo Admin, saya ingin membeli ${rank} seharga Rp${price.toLocaleString()}`;
-        window.location.href = `https://wa.me/628975293251?text=${encodeURIComponent(msg)}`;
-    }
+return "Rp" + x.toLocaleString("id-ID");
+
+}
+
+function updateKeyTotal(){
+
+let qty=parseInt(document.getElementById("keyQty").value);
+
+if(isNaN(qty)||qty<1){
+
+qty=1;
+
+document.getElementById("keyQty").value=1;
+
+}
+
+document.getElementById("keyTotal").innerHTML=
+
+rupiah(qty*4500);
+
+}
+
+function checkoutKey(){
+
+let qty=parseInt(document.getElementById("keyQty").value);
+
+let username=document.getElementById("mcUsername").value;
+
+if(username==""){
+
+alert("Masukkan Username Minecraft");
+
+return;
+
+}
+
+let total=qty*4500;
+
+let pesan=
+
+`Halo Admin EverMine Store! 👋
+
+Saya ingin membeli item berikut:
+
+Item : ${qty}x EVERMINE KEY
+
+Total Harga : ${rupiah(total)}
+
+Username Minecraft : ${username}
+
+Mohon info instruksi pembayaran / QRIS.
+
+Terima kasih!`;
+
+window.open(
+
+"https://wa.me/628975293251?text="+
+
+encodeURIComponent(pesan),
+
+"_blank"
+
+);
+
+}
+
+function checkoutRank(rank,harga){
+
+let username=prompt("Masukkan Username Minecraft");
+
+if(username==null||username=="") return;
+
+let pesan=
+
+`Halo Admin EverMine Store! 👋
+
+Saya ingin membeli item berikut:
+
+Item : ${rank}
+
+Total Harga : ${rupiah(harga)}
+
+Username Minecraft : ${username}
+
+Mohon info instruksi pembayaran / QRIS.
+
+Terima kasih!`;
+
+window.open(
+
+"https://wa.me/628975293251?text="+
+
+encodeURIComponent(pesan),
+
+"_blank"
+
+);
+
+}
+
+updateKeyTotal();
+
+</script>
+<footer id="contact" class="footer">
+
+<div class="footer-container">
+
+<h2>🌍 EVERMINE STORE</h2>
+
+<p>
+Server Minecraft Survival Economy Indonesia
+</p>
+
+<div class="footer-info">
+
+<p><b>IP</b> : play.everminesmp.my.id</p>
+
+<p><b>Port</b> : 25372</p>
+
+</div>
+
+<div class="footer-buttons">
+
+<a class="btn"
+href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3"
+target="_blank">
+
+👥 Join WhatsApp
+
+</a>
+
+<a class="btn"
+href="https://wa.me/628975293251"
+target="_blank">
+
+📞 Hubungi Admin
+
+</a>
+
+</div>
+
+<p class="copyright">
+
+© 2026 EverMine Store
+<br>
+All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<style>
+
+.footer{
+
+margin-top:100px;
+
+padding:70px 8%;
+
+background:#111;
+
+border-top:1px solid rgba(176,38,255,.25);
+
+text-align:center;
+
+}
+
+.footer h2{
+
+font-size:32px;
+
+color:#b026ff;
+
+margin-bottom:15px;
+
+}
+
+.footer p{
+
+color:#bbb;
+
+margin:8px 0;
+
+}
+
+.footer-buttons{
+
+margin-top:25px;
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.footer .btn{
+
+min-width:220px;
+
+}
+
+.footer-info{
+
+margin-top:20px;
+
+font-size:17px;
+
+}
+
+.copyright{
+
+margin-top:35px;
+
+font-size:14px;
+
+opacity:.7;
+
+}
+
+/* Fade Animation */
+
+.fade{
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:all .8s ease;
+
+}
+
+.fade.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#0d0d0d;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#7b2cff;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#b026ff;
+
+}
+
+</style>
+
+<script>
+
+/* Fade on Scroll */
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+});
+
+document.querySelectorAll("section,.card,.footer").forEach(el=>{
+
+el.classList.add("fade");
+
+observer.observe(el);
+
+});
+
+/* Copy IP */
+
+function copyIP(){
+
+navigator.clipboard.writeText("play.everminesmp.my.id");
+
+alert("IP berhasil disalin!");
+
+}
+
+/* Smooth Navbar Active */
+
+document.querySelectorAll("nav a").forEach(link=>{
+
+link.onclick=function(){
+
+document.querySelector(this.getAttribute("href"))
+
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+return false;
+
+};
+
+});
+
 </script>
 
 </body>
+
 </html>
