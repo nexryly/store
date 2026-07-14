@@ -1,32 +1,97 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EverMine Store</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;scroll-behavior:smooth}
-body{background:#09070f;color:#fff}
-body:before,body:after{content:"";position:fixed;width:450px;height:450px;border-radius:50%;filter:blur(120px);z-index:-1}
-body:before{background:#6d28ff;left:-120px;top:-120px;opacity:.25}body:after{background:#b026ff;right:-120px;bottom:-120px;opacity:.2}
-nav{position:sticky;top:0;background:#120d1dcc;padding:16px;display:flex;justify-content:space-between;backdrop-filter:blur(8px)}
-nav a{color:#fff;text-decoration:none;margin-left:18px}
-.hero{text-align:center;padding:70px 20px}.hero h1{font-size:48px;color:#d6a8ff}
-.btn,.buy{display:inline-block;margin:8px;padding:12px 22px;border-radius:10px;text-decoration:none;color:#fff;background:linear-gradient(90deg,#6d28ff,#b026ff)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1200px;margin:auto;padding:25px}
-.card{background:#151020;border:1px solid #6d28ff;border-radius:18px;padding:20px;box-shadow:0 0 18px #6d28ff33;transition:.3s}
-.card:hover{transform:translateY(-6px);box-shadow:0 0 30px #b026ff88}
-h2{text-align:center;color:#d6a8ff;padding-top:30px}
-.price{font-size:30px;margin:10px 0}.badge{display:inline-block;background:#b026ff;padding:4px 10px;border-radius:20px;font-size:12px}
-ul{margin:10px 0 18px 18px}input{width:100%;padding:10px;border-radius:8px;border:none}
-footer{text-align:center;padding:30px;color:#aaa}
-</style></head><body>
-<nav><b>🌍 EverMine Store</b><div><a href="#trial">Trial</a><a href="#permanent">Permanent</a><a href="#key">Key</a></div></nav>
-<section class="hero"><h1>EVERMINE STORE</h1><p>IP: <b>play.everminesmp.my.id</b><br>Port: <b>25372</b></p>
-<a class="btn" href="https://wa.me/628975293251">WhatsApp Admin</a>
-<a class="btn" href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3">Grup WhatsApp</a></section>
-<h2 id="trial">⭐ Rank Trial (30 Hari)</h2><div class="grid"><div class='card'><span class='badge'>TRIAL</span><h3>VIP</h3><div class='price'>Rp 25.000</div><ul><li>Semua fitur rank sebelumnya</li></ul><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20VIP%20Trial'>Beli Trial</a></div><div class='card'><span class='badge'>TRIAL</span><h3>VIP+</h3><div class='price'>Rp 40.000</div><ul><li>Semua fitur rank sebelumnya</li></ul><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20VIP+%20Trial'>Beli Trial</a></div><div class='card'><span class='badge'>TRIAL</span><h3>MVP</h3><div class='price'>Rp 55.000</div><ul><li>Semua fitur rank sebelumnya</li></ul><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20MVP%20Trial'>Beli Trial</a></div><div class='card'><span class='badge'>TRIAL</span><h3>LEGENDARY</h3><div class='price'>Rp 190.000</div><ul><li>Semua fitur rank sebelumnya</li></ul><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20LEGENDARY%20Trial'>Beli Trial</a></div><div class='card'><span class='badge'>TRIAL</span><h3>DIVINE</h3><div class='price'>Rp 250.000</div><ul><li>Semua fitur rank sebelumnya</li></ul><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20DIVINE%20Trial'>Beli Trial</a></div></div><h2 id='permanent'>👑 Rank Permanent</h2><div class='grid'><div class='card'><span class='badge'>PERMANENT</span><h3>VIP</h3><div class='price'>Rp 40.000</div><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20VIP%20Permanent'>Beli Permanent</a></div><div class='card'><span class='badge'>PERMANENT</span><h3>VIP+</h3><div class='price'>Rp 60.000</div><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20VIP+%20Permanent'>Beli Permanent</a></div><div class='card'><span class='badge'>PERMANENT</span><h3>MVP</h3><div class='price'>Rp 85.000</div><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20MVP%20Permanent'>Beli Permanent</a></div><div class='card'><span class='badge'>PERMANENT</span><h3>LEGENDARY</h3><div class='price'>Rp 255.000</div><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20LEGENDARY%20Permanent'>Beli Permanent</a></div><div class='card'><span class='badge'>PERMANENT</span><h3>DIVINE</h3><div class='price'>Rp 355.000</div><a class='buy' href='https://wa.me/628975293251?text=Saya%20ingin%20membeli%20DIVINE%20Permanent'>Beli Permanent</a></div></div><h2 id="key">🗝 EverMine Key</h2><div class="grid"><div class="card"><div class="price">Rp 4.500 / Key</div>
-<input id="qty" type="number" min="1" value="1"><p>Total: <b id="total"></b></p><a id="buy" class="buy">Beli Key</a></div></div>
-<footer>© EverMineSMP</footer>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EverMineSMP Store</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card: #141414;
+            --purple: #8b5cf6;
+            --purple-glow: rgba(139, 92, 246, 0.4);
+            --text: #ffffff;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: auto; }
+
+        /* Hero */
+        .hero { text-align: center; padding: 40px 20px; border-bottom: 2px solid #222; }
+        .status { color: #22c55e; font-weight: bold; background: #064e3b; padding: 5px 15px; border-radius: 20px; }
+        
+        /* Card Styles */
+        .card { background: var(--card); border: 1px solid #333; padding: 20px; border-radius: 15px; margin-bottom: 20px; transition: 0.3s; }
+        .card:hover { border-color: var(--purple); box-shadow: 0 0 15px var(--purple-glow); }
+        .badge { font-size: 0.7em; background: #333; padding: 4px 8px; border-radius: 5px; color: var(--purple); }
+        
+        /* Buttons */
+        .btn { display: block; width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; text-align: center; margin-top: 10px; }
+        .btn-purple { background: linear-gradient(90deg, #8b5cf6, #6d28d9); color: white; }
+        .btn-wa { background: #25d366; color: white; text-decoration: none; }
+        
+        /* Inputs */
+        input { width: 100%; padding: 10px; margin: 5px 0; background: #222; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <h1>EverMineSMP</h1>
+        <p class="status">● Server Online</p>
+        <p>IP: play.everminesmp.my.id <button onclick="navigator.clipboard.writeText('play.everminesmp.my.id')">Copy</button></p>
+        <a href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3" class="btn btn-wa">Join WhatsApp</a>
+    </div>
+
+    <h2>⭐ Rank Trial</h2>
+    <div id="trial-ranks">
+        <!-- Contoh Card Rank -->
+        <div class="card">
+            <span class="badge">STARTER</span>
+            <h3>VIP</h3>
+            <p>Rp25.000 / 30 Hari</p>
+            <button class="btn btn-purple" onclick="checkout('VIP Trial', 25000)">Beli Sekarang</button>
+        </div>
+    </div>
+
+    <h2>👑 Rank Permanent</h2>
+    <div id="permanent-ranks">
+        <div class="card">
+            <span class="badge">PREMIUM</span>
+            <h3>VIP</h3>
+            <p>Rp40.000</p>
+            <button class="btn btn-purple" onclick="checkout('VIP Permanent', 40000)">Beli Sekarang</button>
+        </div>
+    </div>
+
+    <h2>🗝 EverMine Key</h2>
+    <div class="card">
+        <input type="number" id="key-qty" placeholder="Jumlah Key" oninput="calculateKey()">
+        <input type="text" id="mc-user" placeholder="Username Minecraft">
+        <p>Total: Rp<span id="total-price">0</span></p>
+        <button class="btn btn-purple" onclick="sendKeyCheckout()">Checkout WhatsApp</button>
+    </div>
+</div>
+
 <script>
-const q=document.getElementById('qty'),t=document.getElementById('total'),b=document.getElementById('buy');
-function u(){let n=Math.max(1,parseInt(q.value)||1),ttl=n*4500;t.textContent='Rp '+ttl.toLocaleString('id-ID');b.href='https://wa.me/628975293251?text='+encodeURIComponent('Saya ingin membeli '+n+' EverMine Key. Total Rp '+ttl.toLocaleString('id-ID'));}
-q.oninput=u;u();
-</script></body></html>
+    function calculateKey() {
+        let qty = document.getElementById('key-qty').value;
+        document.getElementById('total-price').innerText = (qty * 4500).toLocaleString();
+    }
+
+    function sendKeyCheckout() {
+        let qty = document.getElementById('key-qty').value;
+        let total = qty * 4500;
+        let user = document.getElementById('mc-user').value;
+        let msg = `Halo Admin EverMine Store! 👋\n\nSaya ingin membeli item berikut:\nItem: ${qty}x EVERMINE KEY\nTotal Harga: Rp${total.toLocaleString()}\nUsername Minecraft: ${user}\n\nMohon info instruksi pembayaran / QRIS. Terima kasih!`;
+        window.location.href = `https://wa.me/628975293251?text=${encodeURIComponent(msg)}`;
+    }
+
+    function checkout(rank, price) {
+        let msg = `Halo Admin, saya ingin membeli ${rank} seharga Rp${price.toLocaleString()}`;
+        window.location.href = `https://wa.me/628975293251?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+
+</body>
+</html>
