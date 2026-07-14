@@ -1,125 +1,62 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EverMine Store | Premium</title>
-    <style>
-        :root {
-            --bg-dark: #050505;
-            --card-bg: #120f1a;
-            --purple-neon: #a855f7;
-            --purple-deep: #4c1d95;
-            --text: #ffffff;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container { max-width: 500px; margin: auto; }
-
-        .banner {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, var(--purple-deep), var(--bg-dark));
-            border-radius: 20px;
-            border: 1px solid var(--purple-neon);
-            margin-bottom: 25px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #2d2640;
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .item-name { font-weight: 600; font-size: 1.1em; }
-        .price { color: var(--purple-neon); font-weight: bold; margin-top: 4px; }
-
-        .btn-checkout {
-            background: var(--purple-neon);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9em;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        input[type="number"] {
-            width: 45px;
-            background: #252033;
-            border: 1px solid var(--purple-neon);
-            color: white;
-            padding: 5px;
-            border-radius: 5px;
-            margin-right: 8px;
-            text-align: center;
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>EverMine Store</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#0b1020;color:#fff}
+header{padding:20px;background:#08111f;text-align:center;font-size:32px;font-weight:bold;color:#22d39b}
+.hero{padding:50px 20px;text-align:center}
+.btn{display:inline-block;margin:8px;padding:14px 28px;border-radius:10px;background:#18b67a;color:#fff;text-decoration:none;font-weight:bold}
+.card{max-width:900px;margin:20px auto;background:#121b2d;padding:20px;border-radius:16px;border:1px solid #233}
+h2{color:#22d39b}.price{font-size:28px;font-weight:bold}
+ul{line-height:1.8}
+.buy{display:block;text-align:center;margin-top:20px;padding:14px;background:#8a2be2;border-radius:10px;color:#fff;text-decoration:none}
+footer{text-align:center;padding:30px;color:#aaa}
+</style>
 </head>
 <body>
-
-<div class="container">
-    <div class="banner">
-        <h1>EVERMINE STORE</h1>
-        <p>Premium Minecraft Server Shop</p>
-    </div>
-
-    <div class="card">
-        <div>
-            <div class="item-name">Mystery Key</div>
-            <div class="price">Rp4.500</div>
-        </div>
-        <div>
-            <input type="number" id="qty-key" value="1" min="1">
-            <a href="#" class="btn-checkout" onclick="buy('Mystery Key', 4500, 'key')">Beli</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div>
-            <div class="item-name">VIP Trial</div>
-            <div class="price">Rp25.000</div>
-        </div>
-        <div>
-            <input type="number" id="qty-vip" value="1" min="1">
-            <a href="#" class="btn-checkout" onclick="buy('VIP Trial', 25000, 'vip')">Beli</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <div>
-            <div class="item-name">Rank Slayer</div>
-            <div class="price">Rp80.000</div>
-        </div>
-        <div>
-            <input type="number" id="qty-slayer" value="1" min="1">
-            <a href="#" class="btn-checkout" onclick="buy('Rank Slayer', 80000, 'slayer')">Beli</a>
-        </div>
-    </div>
-</div>
-
+<header>EVERMINESMP STORE</header>
+<section class="hero">
+<h1>Support EverMineSMP</h1>
+<p>IP: <b>play.everminesmp.my.id</b><br/>Port: <b>25372</b></p>
+<a class="btn" href="https://wa.me/628975293251">WhatsApp Admin</a>
+<a class="btn" href="https://chat.whatsapp.com/F5MypSimVr00PClrlpbGS3">Grup WhatsApp</a>
+</section>
+<div class="card"><h2>VIP</h2>
+<div class="price">Trial Rp 25.000 | Permanen Rp 40.000</div>
+<ul><li>Semua fitur MEMBER, /sethome 5, /feed, /workbench</li><li>Block Limit: 10.000</li><li>Claim: 5</li></ul>
+<a class="buy" href="https://wa.me/628975293251?text=Saya%20ingin%20membeli%20rank%20VIP">Beli Sekarang</a></div><div class="card"><h2>VIP+</h2>
+<div class="price">Trial Rp 40.000 | Permanen Rp 60.000</div>
+<ul><li>Semua fitur VIP, /sethome 7, /heal, /anvil</li><li>Block Limit: 15.000</li><li>Claim: 8</li></ul>
+<a class="buy" href="https://wa.me/628975293251?text=Saya%20ingin%20membeli%20rank%20VIP+">Beli Sekarang</a></div><div class="card"><h2>MVP</h2>
+<div class="price">Trial Rp 55.000 | Permanen Rp 85.000</div>
+<ul><li>Semua fitur VIP+, /sethome 10, /time, /weather, /ec</li><li>Block Limit: 20.000</li><li>Claim: 10</li></ul>
+<a class="buy" href="https://wa.me/628975293251?text=Saya%20ingin%20membeli%20rank%20MVP">Beli Sekarang</a></div><div class="card"><h2>LEGENDARY</h2>
+<div class="price">Trial Rp 190.000 | Permanen Rp 255.000</div>
+<ul><li>Semua fitur MVP, /sethome 15, /fly, /repair, /nick</li><li>Block Limit: 30.000</li><li>Claim: 15</li></ul>
+<a class="buy" href="https://wa.me/628975293251?text=Saya%20ingin%20membeli%20rank%20LEGENDARY">Beli Sekarang</a></div><div class="card"><h2>DIVINE</h2>
+<div class="price">Trial Rp 250.000 | Permanen Rp 355.000</div>
+<ul><li>Semua fitur LEGENDARY, /sethome 20, /tp, /repair all, /flyspeed</li><li>Block Limit: 100.000</li><li>Claim: 100</li></ul>
+<a class="buy" href="https://wa.me/628975293251?text=Saya%20ingin%20membeli%20rank%20DIVINE">Beli Sekarang</a></div><div class="card">
+<h2>EVERMINE KEY</h2>
+<div class="price">Rp 4.500 / Key</div>
+<p>Masukkan jumlah key yang ingin dibeli:</p>
+<input id="qty" min="1" style="width:100%;padding:10px;border-radius:8px;" type="number" value="1"/>
+<p style="margin-top:10px;">Total: <b id="total">Rp 4.500</b></p>
+<a class="buy" href="#" id="buykey">Beli Key</a>
 <script>
-    function buy(name, price, id) {
-        const qty = document.getElementById('qty-' + id).value;
-        const total = qty * price;
-        // Format angka ke Rupiah
-        const totalFormatted = total.toLocaleString('id-ID');
-        const msg = `Halo Admin, saya ingin beli ${qty}x ${name}. Total pembayaran: Rp${totalFormatted}.`;
-        window.location.href = `https://wa.me/628975293251?text=${encodeURIComponent(msg)}`;
-    }
+const qty=document.getElementById('qty');
+const total=document.getElementById('total');
+const buy=document.getElementById('buykey');
+function upd(){
+ let q=Math.max(1,parseInt(qty.value)||1);
+ let t=q*4500;
+ total.innerText='Rp '+t.toLocaleString('id-ID');
+ buy.href='https://wa.me/628975293251?text='+encodeURIComponent('Saya ingin membeli '+q+' EverMine Key. Total Rp '+t.toLocaleString('id-ID'));
+}
+qty.oninput=upd;upd();
 </script>
-</body>
-</html>
+</div><footer>© EverMineSMP Store</footer></body></html>
