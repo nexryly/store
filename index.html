@@ -1,159 +1,125 @@
-# Membuat file index.html dengan tema ungu sesuai referensi gambar yang dikirimkan (WhatsApp Image 2026-07-14 at 16.15.53.jpeg)
-# Tema ungu dengan tombol "Beli Sekarang", sistem kuantitas, dan desain modern.
-
-html_content = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EverMine Store | Purple Theme</title>
+    <title>EverMine Store | Premium</title>
     <style>
         :root {
-            --bg-color: #0f0b15;
-            --card-bg: #1c1526;
-            --accent-purple: #8a2be2;
-            --text-color: #ffffff;
-            --button-color: #9370db;
+            --bg-dark: #050505;
+            --card-bg: #120f1a;
+            --purple-neon: #a855f7;
+            --purple-deep: #4c1d95;
+            --text: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
             margin: 0;
             padding: 20px;
-            display: flex;
-            justify-content: center;
         }
 
-        .container {
-            width: 100%;
-            max-width: 500px;
-        }
+        .container { max-width: 500px; margin: auto; }
 
-        .header {
+        .banner {
             text-align: center;
-            margin-bottom: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--purple-deep), var(--bg-dark));
+            border-radius: 20px;
+            border: 1px solid var(--purple-neon);
+            margin-bottom: 25px;
         }
 
-        .header h1 {
-            color: var(--accent-purple);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .item-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--accent-purple);
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #2d2640;
+            padding: 16px;
             border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
-        .item-info h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.1em;
-        }
+        .item-name { font-weight: 600; font-size: 1.1em; }
+        .price { color: var(--purple-neon); font-weight: bold; margin-top: 4px; }
 
-        .item-info p {
-            margin: 0;
-            color: #ccc;
+        .btn-checkout {
+            background: var(--purple-neon);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
             font-size: 0.9em;
+            font-weight: bold;
+            display: inline-block;
         }
 
-        .action-box {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 5px;
-        }
-
-        .qty-input {
-            width: 40px;
+        input[type="number"] {
+            width: 45px;
+            background: #252033;
+            border: 1px solid var(--purple-neon);
+            color: white;
             padding: 5px;
             border-radius: 5px;
-            border: none;
-            background: #332a40;
-            color: white;
+            margin-right: 8px;
             text-align: center;
-        }
-
-        .btn-buy {
-            background-color: var(--button-color);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.85em;
-            transition: 0.3s;
-        }
-
-        .btn-buy:hover {
-            background-color: var(--accent-purple);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <h1>EverMine Store</h1>
-        <p>Pilih Produk & Beli Sekarang</p>
+    <div class="banner">
+        <h1>EVERMINE STORE</h1>
+        <p>Premium Minecraft Server Shop</p>
     </div>
 
-    <div class="item-card">
-        <div class="item-info">
-            <h3>Mystery Key</h3>
-            <p>Harga: Rp4.500</p>
+    <div class="card">
+        <div>
+            <div class="item-name">Mystery Key</div>
+            <div class="price">Rp4.500</div>
         </div>
-        <div class="action-box">
-            <input type="number" id="qty-key" value="1" min="1" class="qty-input">
-            <a href="#" class="btn-buy" onclick="checkout('Mystery Key', 4500, 'key')">Beli Sekarang</a>
-        </div>
-    </div>
-
-    <div class="item-card">
-        <div class="item-info">
-            <h3>VIP Trial (1 Bln)</h3>
-            <p>Harga: Rp25.000</p>
-        </div>
-        <div class="action-box">
-            <input type="number" id="qty-vip" value="1" min="1" class="qty-input">
-            <a href="#" class="btn-buy" onclick="checkout('VIP Trial', 25000, 'vip')">Beli Sekarang</a>
+        <div>
+            <input type="number" id="qty-key" value="1" min="1">
+            <a href="#" class="btn-checkout" onclick="buy('Mystery Key', 4500, 'key')">Beli</a>
         </div>
     </div>
 
-    <div class="item-card">
-        <div class="item-info">
-            <h3>Rank Slayer</h3>
-            <p>Harga: Rp80.000</p>
+    <div class="card">
+        <div>
+            <div class="item-name">VIP Trial</div>
+            <div class="price">Rp25.000</div>
         </div>
-        <div class="action-box">
-            <input type="number" id="qty-slayer" value="1" min="1" class="qty-input">
-            <a href="#" class="btn-buy" onclick="checkout('Rank Slayer', 80000, 'slayer')">Beli Sekarang</a>
+        <div>
+            <input type="number" id="qty-vip" value="1" min="1">
+            <a href="#" class="btn-checkout" onclick="buy('VIP Trial', 25000, 'vip')">Beli</a>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div>
+            <div class="item-name">Rank Slayer</div>
+            <div class="price">Rp80.000</div>
+        </div>
+        <div>
+            <input type="number" id="qty-slayer" value="1" min="1">
+            <a href="#" class="btn-checkout" onclick="buy('Rank Slayer', 80000, 'slayer')">Beli</a>
         </div>
     </div>
 </div>
 
 <script>
-    function checkout(itemName, price, id) {
+    function buy(name, price, id) {
         const qty = document.getElementById('qty-' + id).value;
         const total = qty * price;
-        const text = `Halo Admin, saya ingin membeli ${qty}x ${itemName}. Total: Rp${total.toLocaleString('id-ID')}.`;
-        const waUrl = `https://wa.me/628975293251?text=${encodeURIComponent(text)}`;
-        window.open(waUrl, '_blank');
+        // Format angka ke Rupiah
+        const totalFormatted = total.toLocaleString('id-ID');
+        const msg = `Halo Admin, saya ingin beli ${qty}x ${name}. Total pembayaran: Rp${totalFormatted}.`;
+        window.location.href = `https://wa.me/628975293251?text=${encodeURIComponent(msg)}`;
     }
 </script>
-
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
