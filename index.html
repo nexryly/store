@@ -226,6 +226,49 @@
   }
   .buy-btn:hover{ filter:brightness(1.08); }
 
+  /* ---------- QRIS Modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(5,7,10,0.78);
+    backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center;
+    z-index:200; padding:20px;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal-box{
+    background:var(--panel); border:1px solid var(--line); border-radius:18px;
+    max-width:380px; width:100%; padding:22px; position:relative;
+    max-height:92vh; overflow-y:auto;
+    animation: modalPop .18s ease;
+  }
+  @keyframes modalPop{
+    from{ opacity:0; transform:scale(.96) translateY(6px); }
+    to{ opacity:1; transform:scale(1) translateY(0); }
+  }
+  .modal-close{
+    position:absolute; top:14px; right:14px; width:30px; height:30px; border-radius:8px;
+    background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    font-size:16px; cursor:pointer; line-height:1;
+  }
+  .modal-close:hover{ background:var(--line); }
+  .modal-head{ text-align:center; margin-bottom:14px; }
+  .modal-head .tag{ color:var(--grass); font-size:11px; letter-spacing:2px; font-weight:700; }
+  .modal-head h3{ font-size:16px; margin-top:6px; }
+  .modal-order{
+    background:var(--panel-2); border:1px solid var(--line); border-radius:10px;
+    padding:12px 14px; margin-bottom:16px; display:flex; flex-direction:column; gap:4px;
+  }
+  .modal-order .row{ display:flex; justify-content:space-between; font-size:13px; color:var(--text-dim); }
+  .modal-order .row b{ color:var(--text); font-weight:600; text-align:right; margin-left:10px; }
+  .modal-order .row.total b{ color:var(--grass); font-family:'VT323',monospace; font-size:20px; }
+  .modal-qris-img{
+    display:block; width:100%; border-radius:12px; border:1px solid var(--line);
+    margin-bottom:14px; background:#fff;
+  }
+  .modal-note{
+    font-size:12px; color:var(--text-dim); text-align:center; margin-bottom:16px; line-height:1.5;
+  }
+  .modal-note b{ color:var(--text); }
+  .modal-actions{ display:flex; flex-direction:column; gap:10px; }
 </style>
 </head>
 <body>
@@ -484,6 +527,33 @@
   </div>
 </section>
 
+<!-- ===================== QRIS MODAL ===================== -->
+<div class="modal-overlay" id="qrisModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeQrisModal()">✕</button>
+    <div class="modal-head">
+      <div class="tag">✅ QRIS · SATU QRIS UNTUK SEMUA</div>
+      <h3>Scan untuk Bayar</h3>
+    </div>
+
+    <div class="modal-order">
+      <div class="row"><span>Item</span><b id="modal-item">-</b></div>
+      <div class="row total"><span>TOTAL</span><b id="modal-total">Rp0</b></div>
+    </div>
+
+    <img class="modal-qris-img" src="qris.jpg" alt="QRIS TOKO NEXRLY, GAMING">
+
+    <div class="modal-note">
+      Scan pakai aplikasi e-wallet / m-banking apa saja yang mendukung QRIS. Setelah bayar, tekan tombol di bawah untuk kirim bukti &amp; konfirmasi ke admin.
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="confirmToAdmin()">✅ Sudah Bayar, Konfirmasi ke Admin</button>
+      <button class="btn btn-ghost" style="width:100%; justify-content:center;" onclick="closeQrisModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
 <footer class="wrap">
   <div class="voxel"></div>
   <div>EverMine SMP — play.everminesmp.my.id : 25613</div>
@@ -506,17 +576,41 @@
     return "Rp" + n.toLocaleString("id-ID");
   }
 
-  // Langsung buka chat WA admin berisi detail pesanan
+  /* ---------- QRIS Modal ---------- */
+  let currentOrder = { item: "", price: 0 };
+
+  // Menampilkan pop-up QRIS berisi detail pesanan
   function openBuy(itemName, price){
+    currentOrder = { item: itemName, price: price };
+    document.getElementById("modal-item").textContent = itemName;
+    document.getElementById("modal-total").textContent = formatRupiah(price);
+    document.getElementById("qrisModal").classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeQrisModal(){
+    document.getElementById("qrisModal").classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  // Setelah user scan & bayar, baru diarahkan ke WA admin untuk konfirmasi
+  function confirmToAdmin(){
     const pesan =
-      "Halo admin EverMine SMP, saya mau order:\n" +
-      "🛒 Item: " + itemName + "\n" +
-      "💰 Harga: " + formatRupiah(price) + "\n" +
+      "Halo admin EverMine SMP, saya sudah bayar QRIS untuk order:\n" +
+      "🛒 Item: " + currentOrder.item + "\n" +
+      "💰 Harga: " + formatRupiah(currentOrder.price) + "\n" +
       "🎮 Nama Minecraft: (isi di sini)\n" +
-      "Mohon info QRIS untuk pembayaran ya, terima kasih!";
+      "📸 Bukti bayar: (lampirkan screenshot di chat ini)\n" +
+      "Mohon segera diproses ya, terima kasih!";
     const url = "https://wa.me/" + ADMIN_WA + "?text=" + encodeURIComponent(pesan);
     window.open(url, "_blank");
+    closeQrisModal();
   }
+
+  // Tutup modal saat klik area gelap di luar box
+  document.getElementById("qrisModal").addEventListener("click", function(e){
+    if(e.target === this) closeQrisModal();
+  });
 
   /* ---------- Checkout Key Insane & Money MC ---------- */
   const unitPrice = { key: 4500, money: 5000 };
