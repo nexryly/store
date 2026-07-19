@@ -521,6 +521,7 @@
   /* ---------- Checkout Key Insane & Money MC ---------- */
   const unitPrice = { key: 4500, money: 5000 };
   const qty = { key: 1, money: 1 };
+  const moneyPerUnit = 10000; // 1 qty Money MC = 10.000 Money in-game
 
   function changeQty(type, delta){
     qty[type] = Math.max(1, Math.min(99, qty[type] + delta));
@@ -532,7 +533,7 @@
     const total = qty[type] * unitPrice[type];
     const itemName = type === "key"
       ? qty.key + "x Key Insane"
-      : (qty.money * 100000).toLocaleString("id-ID") + " Money MC";
+      : (qty.money * moneyPerUnit).toLocaleString("id-ID") + " Money MC";
     openBuy(itemName, total);
   }
 </script>
