@@ -532,7 +532,7 @@
     const total = qty[type] * unitPrice[type];
     const itemName = type === "key"
       ? qty.key + "x Key Insane"
-      : (qty.money * 10000).toLocaleString("id-ID") + " Money MC";
+      : (qty.money * 100k).toLocaleString("id-ID") + " Money MC";
     openBuy(itemName, total);
   }
 </script>
